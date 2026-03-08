@@ -1,0 +1,383 @@
+---
+title: 'Getting Started'
+description: 'Get up and running with Siloé Perú website in minutes'
+icon: 'rocket'
+---
+
+## Welcome to Siloé Perú
+
+Siloé Perú is a volunteer organization dedicated to hospital clowning and support services for children in hospitals and vulnerable communities in Peru. This guide will help you set up and customize the website locally.
+
+<Note>
+The website is built with vanilla HTML, CSS, and JavaScript - no framework required! This makes it easy to customize and deploy.
+</Note>
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed on your system:
+
+<CardGroup cols={2}>
+  <Card title="Web Browser" icon="browser">
+    Any modern web browser (Chrome, Firefox, Safari, or Edge)
+  </Card>
+  <Card title="Text Editor" icon="code">
+    VS Code, Sublime Text, or any code editor of your choice
+  </Card>
+</CardGroup>
+
+<Info>
+No Node.js, npm, or build tools required! The website runs directly in your browser.
+</Info>
+
+## Project Structure
+
+The Siloé Perú website has a simple and intuitive file structure:
+
+```bash
+siloe-peru/
+├── index.html              # Main HTML file with all sections
+├── style.css               # Complete stylesheet with responsive design
+├── img voluntario/         # Images for volunteer section
+│   ├── fondo.png
+│   ├── img2.png
+│   └── ...
+├── img clow/               # Images for clown section
+│   ├── 568201215_18225647026307271_8015100808044120281_n.png
+│   └── ...
+└── img logo de mensajeria.png  # WhatsApp contact button
+```
+
+<Note>
+All sections are contained in a single `index.html` file, making it easy to manage and deploy.
+</Note>
+
+## Quick Start
+
+<Steps>
+  <Step title="Download the Project">
+    Clone or download the Siloé Perú website files to your local machine:
+    
+    ```bash
+    git clone https://github.com/your-repo/siloe-peru.git
+    cd siloe-peru
+    ```
+  </Step>
+
+  <Step title="Open in Browser">
+    Simply open the `index.html` file in your web browser:
+    
+    - **Windows**: Right-click `index.html` → Open with → Your browser
+    - **Mac**: Right-click `index.html` → Open With → Your browser
+    - **Linux**: Right-click `index.html` → Open With → Your browser
+    
+    Or drag and drop the file into your browser window.
+  </Step>
+
+  <Step title="Explore the Website">
+    The website will load with the hero section visible. Use the navigation buttons to explore:
+    
+    - **Nosotros** (About Us) - Default active section
+    - **Voluntariado Siloé** (Volunteer Program)
+    - **Clow de Siloé** (Hospital Clowning)
+    - **Nuestros Aliados** (Our Partners)
+  </Step>
+</Steps>
+
+## Main Sections Overview
+
+The website features four interactive sections, each with its own purpose and content:
+
+### 1. Nosotros (About Us)
+
+The default landing section showcasing Siloé Perú's mission and values.
+
+```html
+<div id="seccion-nosotros" class="seccion-activa">
+  <section class="nosotros-hero">
+    <h1>Sobre Siloé</h1>
+    <p>"Transformamos el dolor en esperanza a través de la solidaridad y el acompañamiento"</p>
+  </section>
+  <!-- Mission, Vision, Values, and Impact sections -->
+</div>
+```
+
+**Key Features:**
+- Mission and vision statements
+- Six core values (Compassion, Solidarity, Hope, Authenticity, Inclusion, Excellence)
+- Impact statistics (500+ children, 200+ volunteers, 10+ years)
+- Call-to-action buttons
+
+### 2. Voluntariado Siloé (Volunteer Program)
+
+Dedicated section for volunteer recruitment and information.
+
+```html
+<div id="seccion-voluntariado" class="seccion-inactiva">
+  <section class="hospital-info">
+    <h2>Nuestro Impacto en el Hospital del Niño</h2>
+    <div class="grid-actividades">
+      <div class="card">
+        <h3>Acompañamiento en Camas</h3>
+        <p>Lectura de cuentos, juegos de mesa y escucha activa...</p>
+      </div>
+      <!-- More activity cards -->
+    </div>
+  </section>
+</div>
+```
+
+**Key Features:**
+- Activity cards (Bedside companionship, Family support, Art workshops)
+- Interactive flip gallery with volunteer stories
+- Volunteer application form with FormSubmit.co integration
+
+### 3. Clow de Siloé (Hospital Clowning)
+
+Colorful section dedicated to the hospital clown program.
+
+```html
+<div id="seccion-clow" class="seccion-inactiva">
+  <section class="clow-hero">
+    <h1>🤡 El Clow de Siloé 🤡</h1>
+    <p class="clow-tagline">La Magia de la Risa es Nuestra Medicina</p>
+  </section>
+  <!-- Inspiration quotes and clown gallery -->
+</div>
+```
+
+**Key Features:**
+- Vibrant gradient background (yellow and pink)
+- Inspirational quotes about laughter and healing
+- Flip-card gallery showcasing clown visits
+- Dedicated clown volunteer application form
+
+### 4. Nuestros Aliados (Our Partners)
+
+Section highlighting strategic partnerships and collaborations.
+
+```html
+<div id="seccion-aliados" class="seccion-inactiva">
+  <section class="aliados-hero">
+    <h1>🤝 Nuestros Aliados</h1>
+    <p>Instituciones comprometidas con transformar vidas...</p>
+  </section>
+</div>
+```
+
+**Key Features:**
+- Partner information (featuring UPC - Universidad Peruana de Ciencias Aplicadas)
+- Collaboration details and benefits
+- Gallery placeholder for partner event photos
+
+## Navigation System
+
+The website uses a JavaScript-based section switcher located in the hero banner:
+
+```html
+<div class="nav-buttons">
+  <button id="btn-nosotros" class="nav-btn nav-btn-active">
+    ℹ️ Nosotros
+  </button>
+  <button id="btn-voluntarios" class="nav-btn">
+    👥 Voluntariado Siloé
+  </button>
+  <button id="btn-clow" class="nav-btn">
+    🤡 Clow de Siloé
+  </button>
+  <button id="btn-aliados" class="nav-btn">
+    🤝 Nuestros Aliados
+  </button>
+</div>
+```
+
+**How it Works:**
+1. Clicking a navigation button hides all sections
+2. The clicked section becomes visible with `seccion-activa` class
+3. The active button receives `nav-btn-active` styling
+4. Page smoothly scrolls to the top
+
+## Styling & Design
+
+The website uses a beautiful color palette inspired by hope and joy:
+
+```css
+:root {
+  --azul-siloe: #29abe2;       /* Siloé blue */
+  --celeste-claro: #e1f5fe;    /* Light blue for cards */
+  --gris-oscuro: #333;         /* Primary text */
+  --blanco: #ffffff;           /* Main background */
+  --amarillo-vibrante: #FFD700; /* Joy yellow */
+  --rosa-vibrante: #FF69B4;     /* Energy pink */
+}
+```
+
+**Typography:**
+- Headings: `Playfair Display` (serif, elegant)
+- Body text: `Montserrat` (sans-serif, clean)
+
+## Interactive Features
+
+### Flip Card Gallery
+
+The website includes an interactive 3D flip card gallery in both volunteer and clown sections:
+
+```javascript
+flipCards.forEach(card => {
+  card.addEventListener('click', function() {
+    this.classList.toggle('flipped');
+  });
+});
+```
+
+**User Experience:**
+- Click any image to flip and reveal a story or testimonial
+- Click again to flip back to the image
+- Smooth 3D rotation animation
+
+### WhatsApp Contact Button
+
+A fixed floating button in the bottom-right corner for easy contact:
+
+```html
+<div class="whatsapp-container">
+  <a href="https://wa.me/51930917199" target="_blank" 
+     class="whatsapp-btn" title="Contáctanos por WhatsApp">
+    <img src="./img logo de mensajeria.png" alt="WhatsApp">
+  </a>
+  <p class="whatsapp-label">Contactate con nosotros</p>
+</div>
+```
+
+## Forms Integration
+
+Both volunteer forms use **FormSubmit.co** for email submission:
+
+```html
+<form action="https://formsubmit.co/darlycampoverde@gmail.com" method="POST">
+  <div class="form-group">
+    <label for="nombre-voluntario">Nombre Completo *</label>
+    <input type="text" name="Nombre Completo" required>
+  </div>
+  <!-- More form fields -->
+  <button type="submit" class="btn-enviar">ENVIAR MI SOLICITUD</button>
+</form>
+```
+
+<Info>
+FormSubmit.co provides free form backend without server-side code. Submissions are sent directly to the configured email address.
+</Info>
+
+## Responsive Design
+
+The website is fully responsive with mobile-first breakpoints:
+
+```css
+@media (max-width: 768px) {
+  .nav-btn {
+    padding: 12px 30px;
+    font-size: 0.9rem;
+  }
+  
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  
+  .grid-actividades {
+    grid-template-columns: 1fr;
+  }
+}
+```
+
+**Mobile Optimizations:**
+- Stacked navigation buttons
+- Single-column layouts for cards and grids
+- Reduced font sizes
+- Optimized touch targets
+
+## Next Steps
+
+Now that you have the website running locally, here are some suggested next steps:
+
+<CardGroup cols={2}>
+  <Card title="Customize Content" icon="pencil" href="/customization/content">
+    Update text, images, and colors to match your needs
+  </Card>
+  <Card title="Styling Guide" icon="palette" href="/development/styling">
+    Learn about the CSS architecture and styling system
+  </Card>
+  <Card title="Responsive Design" icon="mobile" href="/development/responsive-design">
+    Explore mobile-first responsive design patterns
+  </Card>
+  <Card title="Form Customization" icon="envelope" href="/customization/forms">
+    Configure forms and email notifications
+  </Card>
+</CardGroup>
+
+## Common Tasks
+
+Here are some common customization tasks you might want to do:
+
+### Change the Hero Image
+
+The hero section background is set inline in the HTML:
+
+```html
+<section class="hero" style="background-image: 
+  linear-gradient(135deg, rgba(41, 171, 226, 0.75), rgba(255, 107, 180, 0.75)), 
+  url('./img voluntario/fondo.png');">
+```
+
+Replace `'./img voluntario/fondo.png'` with your image path.
+
+### Update Contact Email
+
+Change the FormSubmit email in both forms:
+
+```html
+<!-- Line 182 and 430 in index.html -->
+<form action="https://formsubmit.co/YOUR-EMAIL@example.com" method="POST">
+```
+
+### Modify Colors
+
+Update CSS variables in `style.css`:
+
+```css
+:root {
+  --azul-siloe: #YOUR-COLOR;
+  --rosa-vibrante: #YOUR-COLOR;
+  /* ... more colors */
+}
+```
+
+### Add Gallery Images
+
+Add new images to the flip card gallery:
+
+```html
+<div class="galeria-item">
+  <div class="galeria-flip-card">
+    <div class="galeria-flip-front">
+      <img src="./your-image.jpg" alt="Description">
+      <div class="galeria-overlay">
+        <p>Your Title</p>
+      </div>
+    </div>
+    <div class="galeria-flip-back">
+      <div class="galeria-historia">
+        <p class="historia-titulo">🎉 Theme</p>
+        <p class="historia-texto">"Your story text here..."</p>
+        <p class="historia-autor">— Author</p>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+## Need Help?
+
+<Info>
+If you encounter any issues or have questions, check out the [development guide](/development) or reach out to the Siloé Perú team.
+</Info>
+
+The website is designed to be simple and maintainable. Most customizations can be done by editing the HTML and CSS files directly - no complex build process required!

@@ -1,0 +1,420 @@
+---
+title: 'Content Customization'
+description: 'Learn how to update text, messaging, and content throughout the website'
+icon: 'file-lines'
+---
+
+## Overview
+
+All content for the Siloé Perú website is contained within `~/workspace/source/index.html`. This guide shows you how to customize text, messages, statistics, and calls-to-action for your organization.
+
+## Mission and Vision
+
+### Mission Statement
+
+**Location:** `index.html:540-543`
+
+```html
+<h2>Nuestra Misión</h2>
+<p>
+    Acompañar y apoyar a niños hospitalizados y sus familias en el Hospital del Niño y comunidades vulnerables de Perú, 
+    a través del voluntariado y la alegría, transformando momentos de dolor en instantes de esperanza y conexión humana.
+</p>
+```
+
+<Steps>
+  <Step title="Locate the mission section">
+    Find the `.mision-card` div in the "Nosotros" (About) section around line 540
+  </Step>
+  
+  <Step title="Update the paragraph text">
+    Replace the `<p>` content with your organization's mission statement
+  </Step>
+  
+  <Step title="Keep it concise">
+    Aim for 2-3 sentences that clearly state your purpose and approach
+  </Step>
+</Steps>
+
+### Vision Statement
+
+**Location:** `index.html:548-552`
+
+```html
+<h2>Nuestra Visión</h2>
+<p>
+    Ser un movimiento de transformación social donde el voluntariado no sea solo una acción, sino una forma de vida. 
+    Un Perú donde cada niño se sienta acompañado, valorado y capaz de soñar grande, incluso en los momentos más difíciles.
+</p>
+```
+
+## Hero Section Content
+
+### Main Quote
+
+**Location:** `index.html:18-20`
+
+```html
+<h1>"Estuve enfermo y me visitaste"</h1>
+<p>— Mt 25:36 —</p>
+<p>Acompañamos a niños y familias en su proceso de recuperación...</p>
+```
+
+This biblical quote sets the tone for the entire site. To customize:
+
+<CodeGroup>
+```html Original
+<h1>"Estuve enfermo y me visitaste"</h1>
+<p>— Mt 25:36 —</p>
+```
+
+```html Custom Example
+<h1>"Your inspiring quote here"</h1>
+<p>— Source attribution —</p>
+```
+</CodeGroup>
+
+## Section Titles and Descriptions
+
+### Volunteer Section Titles
+
+**Hospital Impact Title:** `index.html:43`
+```html
+<h2>Nuestro Impacto en el Hospital del Niño</h2>
+```
+
+**Gallery Title:** `index.html:63`
+```html
+<h2>Historias que Transforman Vidas</h2>
+<p class="galeria-subtitulo">Cada momento cuenta. Cada sonrisa importa.</p>
+```
+
+### Clown Section Titles
+
+**Main Title:** `index.html:219`
+```html
+<h1>🤡 El Clow de Siloé 🤡</h1>
+<p class="clow-tagline">La Magia de la Risa es Nuestra Medicina</p>
+```
+
+**Inspiration Section:** `index.html:237`
+```html
+<h2>Frases que Nos Inspiran</h2>
+```
+
+## Inspirational Quotes
+
+The site features multiple inspirational quotes in card format. Here's how to customize them:
+
+### Clown Inspiration Cards
+
+**Location:** `index.html:241-260`
+
+<CodeGroup>
+```html Card 1 - La risa
+<div class="frase-card">
+    <div class="frase-emoji">😊</div>
+    <p class="frase-text">"La risa es el camino más corto entre dos personas"</p>
+    <p class="frase-author">— Victor Borge</p>
+</div>
+```
+
+```html Card 2 - Diagnóstico
+<div class="frase-card">
+    <div class="frase-emoji">🌟</div>
+    <p class="frase-text">"No cambiamos el diagnóstico, pero sí el pronóstico del día"</p>
+    <p class="frase-author">— Siloé Perú</p>
+</div>
+```
+
+```html Card 3 - Clown
+<div class="frase-card">
+    <div class="frase-emoji">💖</div>
+    <p class="frase-text">"Ser clown es ser el guardián de la esperanza con una sonrisa"</p>
+    <p class="frase-author">— Siloé Perú</p>
+</div>
+```
+</CodeGroup>
+
+<Tip>
+  Keep quote text concise (under 20 words) for better visual presentation. The cards are designed for short, impactful messages.
+</Tip>
+
+## Statistics and Impact Numbers
+
+### Impact Statistics
+
+**Location:** `index.html:664-683`
+
+The site displays key statistics about your impact:
+
+```html
+<div class="stat-box">
+    <h3 style="font-size: 2.5rem; color: var(--amarillo-vibrante);">+500</h3>
+    <p>Niños acompañados anualmente</p>
+</div>
+
+<div class="stat-box">
+    <h3 style="font-size: 2.5rem; color: var(--rosa-vibrante);">+200</h3>
+    <p>Voluntarios activos</p>
+</div>
+
+<div class="stat-box">
+    <h3 style="font-size: 2.5rem; color: var(--azul-siloe);">+10</h3>
+    <p>Años de impacto</p>
+</div>
+
+<div class="stat-box">
+    <h3 style="font-size: 2.5rem; color: var(--rosa-vibrante);">100%</h3>
+    <p>Compromiso con la misión</p>
+</div>
+```
+
+<Steps>
+  <Step title="Update the numbers">
+    Change the `<h3>` content to reflect your organization's actual impact numbers
+  </Step>
+  
+  <Step title="Modify the descriptions">
+    Update the `<p>` text to describe what each number represents
+  </Step>
+  
+  <Step title="Add or remove stat boxes">
+    Copy/paste entire `<div class="stat-box">` blocks to add more statistics or remove ones you don't need
+  </Step>
+</Steps>
+
+## Activity Cards
+
+### Volunteer Activities
+
+**Location:** `index.html:47-59`
+
+```html
+<div class="card">
+    <h3>Acompañamiento en Camas</h3>
+    <p>Lectura de cuentos, juegos de mesa y escucha activa para reducir el estrés de la hospitalización.</p>
+</div>
+```
+
+Each activity card follows this structure. To customize:
+
+1. **Title (`<h3>`)**: Name of the activity
+2. **Description (`<p>`)**: Brief explanation (1-2 sentences)
+
+### "What We Do" Activity Cards
+
+**Location:** `index.html:604-657`
+
+These detailed activity cards include icons:
+
+```html
+<div class="actividad-card">
+    <div class="actividad-header">
+        <span class="actividad-icon">👥</span>
+        <h3>Voluntariado Hospitalario</h3>
+    </div>
+    <p>Nuestros voluntarios acompañan diariamente a niños hospitalizados...</p>
+</div>
+```
+
+## Call-to-Action Buttons
+
+### Navigation Buttons
+
+**Location:** `index.html:23-36`
+
+```html
+<button id="btn-nosotros" class="nav-btn nav-btn-active">
+    ℹ️ Nosotros
+</button>
+<button id="btn-voluntarios" class="nav-btn">
+    👥 Voluntariado Siloé
+</button>
+<button id="btn-clow" class="nav-btn">
+    🤡 Clow de Siloé
+</button>
+<button id="btn-aliados" class="nav-btn">
+    🤝 Nuestros Aliados
+</button>
+```
+
+<Warning>
+  Do NOT change the `id` attributes (like `id="btn-voluntarios"`). These are used by JavaScript for navigation. Only modify the text between the button tags.
+</Warning>
+
+### Form Submit Buttons
+
+**Volunteer Form:** `index.html:208`
+```html
+<button type="submit" class="btn-enviar">ENVIAR MI SOLICITUD</button>
+```
+
+**Clown Form:** `index.html:464`
+```html
+<button type="submit" class="btn-enviar btn-clow-submit">¡SÍ, QUIERO SER CLOWN DE SILOÉ!</button>
+```
+
+### Section Call-to-Action
+
+**Location:** `index.html:689-695`
+
+```html
+<h2 style="font-size: 2.2rem; margin-bottom: 20px;">¿Quieres Ser Parte del Cambio?</h2>
+<p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 40px;">
+    Tu voluntariado puede transformar la vida de un niño. 
+    Únete a nuestra comunidad de solidaridad y descubre el poder de hacer una diferencia.
+</p>
+<div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+    <button class="nosotros-btn-volunteer" onclick="document.getElementById('btn-voluntarios').click()">
+        👥 Sé Voluntario
+    </button>
+    <button class="nosotros-btn-clow" onclick="document.getElementById('btn-clow').click()">
+        🤡 Sé Clown
+    </button>
+</div>
+```
+
+## Footer Content
+
+### Footer Text and Social Links
+
+**Location:** `index.html:703-710`
+
+```html
+<footer>
+    <p>Siloé Perú - Transformando el dolor en esperanza</p>
+    <div class="social-icons">
+        <a href="https://www.facebook.com/siloe.peru" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/siloeperu/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+    <p style="font-size: 0.7rem; margin-top: 20px; opacity: 0.6;">© 2026 Siloé Perú. Todos los derechos reservados.</p>
+</footer>
+```
+
+<Steps>
+  <Step title="Update tagline">
+    Change "Transformando el dolor en esperanza" to your organization's tagline
+  </Step>
+  
+  <Step title="Update social links">
+    Replace Facebook and Instagram URLs with your organization's social media profiles
+  </Step>
+  
+  <Step title="Update copyright">
+    Modify the copyright year and organization name
+  </Step>
+  
+  <Step title="Add more social links (optional)">
+    Add more `<a>` tags for additional social media platforms:
+    ```html
+    <a href="https://twitter.com/yourorg" target="_blank" rel="noopener">Twitter</a>
+    <a href="https://linkedin.com/company/yourorg" target="_blank" rel="noopener">LinkedIn</a>
+    ```
+  </Step>
+</Steps>
+
+## Gallery Card Stories
+
+Each gallery image has a flip card with a story on the back. These are located throughout the gallery sections.
+
+**Example from Volunteer Gallery:** `index.html:77-82`
+
+```html
+<div class="galeria-flip-back">
+    <div class="galeria-historia">
+        <p class="historia-titulo">🤝 Comunidad</p>
+        <p class="historia-texto">
+            "Un voluntario es fuerte, pero una comunidad de voluntarios es invencible. 
+            Trabajamos juntos para crear un impacto tan grande que ningún niño se sienta abandonado."
+        </p>
+        <p class="historia-autor">— Misión Siloé</p>
+    </div>
+</div>
+```
+
+To customize gallery stories:
+
+1. **Title** (`historia-titulo`): Short descriptor with emoji
+2. **Story** (`historia-texto`): 2-3 sentence inspiring message
+3. **Author** (`historia-autor`): Attribution line
+
+<Tip>
+  Gallery stories should be 40-60 words for optimal readability when the card flips. Longer text may require scrolling.
+</Tip>
+
+## Clown Introduction Text
+
+**Location:** `index.html:222-233`
+
+```html
+<div class="clow-intro">
+    <p>
+        En los pasillos del Hospital del Niño, la risa es medicina. Nuestros clowns hospitalarios 
+        transforman momentos de miedo y dolor en instantes de alegría y esperanza...
+    </p>
+    <p>
+        No somos performers que buscan aplausos. Somos acompañantes que entienden que en el rostro 
+        de cada niño hospitalizado hay universos de emociones...
+    </p>
+</div>
+```
+
+## Form Section Titles
+
+### Volunteer Form Heading
+
+**Location:** `index.html:179-180`
+
+```html
+<h2 style="text-align:center;">Formulario de Postulación - Voluntarios</h2>
+<p style="text-align:center;">Tu seguridad y la de los niños es nuestra prioridad. Por favor, completa tus datos.</p>
+```
+
+### Clown Form Heading
+
+**Location:** `index.html:425-426`
+
+```html
+<h2 style="text-align:center;">¡Únete como Clown de Siloé!</h2>
+<p style="text-align:center; font-weight: 300;">Queremos conocer a nuevos voluntarios que traigan alegría y esperanza a nuestros niños.</p>
+```
+
+## Values Section
+
+**Location:** `index.html:560-596`
+
+The values are presented as numbered cards:
+
+```html
+<div class="valor-item">
+    <div class="valor-numero">1</div>
+    <h3>Compasión</h3>
+    <p>Sentir el dolor ajeno como propio y responder con acciones oportunas y generosas.</p>
+</div>
+```
+
+To customize:
+- Update the value name in `<h3>`
+- Modify the description in `<p>`
+- Add or remove entire `valor-item` divs as needed
+
+## Best Practices
+
+<Tip>
+  **Keep it consistent:** Maintain a similar tone and voice across all sections for a cohesive brand experience.
+</Tip>
+
+<Tip>
+  **Test readability:** After making changes, read through the entire site to ensure the flow makes sense.
+</Tip>
+
+<Warning>
+  **Don't break HTML:** When editing, be careful not to accidentally delete closing tags (`</div>`, `</p>`, etc.) or the page layout may break.
+</Warning>
+
+## Related Documentation
+
+- [Colors Customization](/customization/colors) - Update your brand colors
+- [Forms Customization](/customization/forms) - Modify form fields and submission
+- [Images Customization](/customization/images) - Replace gallery photos

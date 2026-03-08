@@ -1,0 +1,218 @@
+---
+title: 'Color Customization'
+description: 'Learn how to customize the color scheme and branding for your organization'
+icon: 'palette'
+---
+
+## Overview
+
+The Siloé Perú website uses CSS custom properties (variables) to maintain a consistent color scheme throughout the site. All color definitions are centralized in the `style.css` file, making it easy to rebrand the entire site by changing just a few values.
+
+## CSS Variables Location
+
+All color variables are defined in the `:root` selector at the top of `~/workspace/source/style.css`:
+
+```css style.css:4-11
+:root {
+    --azul-siloe: #29abe2;       /* Azul del polo en la imagen */
+    --celeste-claro: #e1f5fe;    /* Celeste claro para tarjetas */
+    --gris-oscuro: #333;         /* Texto principal */
+    --blanco: #ffffff;           /* Fondo principal */
+    --amarillo-vibrante: #FFD700; /* Amarillo - Alegría */
+    --rosa-vibrante: #FF69B4;     /* Rosa - Energía */
+}
+```
+
+## Primary Brand Colors
+
+### Azul Siloé (Primary Blue)
+
+**Variable:** `--azul-siloe: #29abe2`
+
+This is the main brand color used throughout the site for:
+- Section headings
+- Primary buttons
+- Navigation highlights
+- Links and accents
+
+**Usage example:**
+```css
+.hospital-info h2 {
+    color: var(--azul-siloe);
+}
+```
+
+### Rosa Vibrante (Vibrant Pink)
+
+**Variable:** `--rosa-vibrante: #FF69B4`
+
+Used for energy and warmth in:
+- Clown section accents
+- Call-to-action elements
+- Hover states
+- Gradient combinations
+
+### Amarillo Vibrante (Vibrant Yellow)
+
+**Variable:** `--amarillo-vibrante: #FFD700`
+
+Adds joy and brightness to:
+- Clown hero sections
+- Statistics displays
+- Inspirational quote cards
+- Gradient backgrounds
+
+## Changing Brand Colors
+
+<Steps>
+  <Step title="Open the CSS file">
+    Navigate to `~/workspace/source/style.css` in your code editor
+  </Step>
+  
+  <Step title="Locate the :root section">
+    Find lines 4-11 at the top of the file where all color variables are defined
+  </Step>
+  
+  <Step title="Update color values">
+    Replace the hex color codes with your organization's brand colors:
+    ```css
+    :root {
+        --azul-siloe: #YOUR_PRIMARY_COLOR;
+        --rosa-vibrante: #YOUR_ACCENT_COLOR;
+        --amarillo-vibrante: #YOUR_HIGHLIGHT_COLOR;
+    }
+    ```
+  </Step>
+  
+  <Step title="Test the changes">
+    Save the file and open `index.html` in your browser to preview the new color scheme
+  </Step>
+</Steps>
+
+<Warning>
+  When changing colors, ensure sufficient contrast ratios for accessibility. Text should be readable against all background colors. Use tools like WebAIM's Contrast Checker to verify your color combinations meet WCAG standards.
+</Warning>
+
+## Gradient Usage
+
+The site extensively uses CSS gradients combining the brand colors. These are used in:
+
+### Hero Sections
+
+```css index.html:17
+background-image: linear-gradient(135deg, rgba(41, 171, 226, 0.75), rgba(255, 107, 180, 0.75))
+```
+
+### Clown Hero Background
+
+```css style.css:184
+background: linear-gradient(135deg, var(--amarillo-vibrante), var(--rosa-vibrante));
+```
+
+### Navigation Buttons (Active State)
+
+```css style.css:66
+background: linear-gradient(135deg, var(--amarillo-vibrante), var(--rosa-vibrante));
+```
+
+### Inspiration Section
+
+```css style.css:268
+background: linear-gradient(135deg, var(--amarillo-vibrante), var(--rosa-vibrante));
+```
+
+## Secondary Colors
+
+### Supporting Colors
+
+- **Celeste Claro** (`--celeste-claro: #e1f5fe`) - Used for card backgrounds
+- **Gris Oscuro** (`--gris-oscuro: #333`) - Main text color
+- **Blanco** (`--blanco: #ffffff`) - Primary background
+
+## Color Consistency Across Sections
+
+The site maintains color consistency through:
+
+1. **Volunteer Section**: Predominantly blue (`--azul-siloe`)
+2. **Clown Section**: Yellow and pink gradients
+3. **About Section**: Mixed blue and pink for impact
+4. **Allies Section**: Blue with pink accents
+
+## Testing Your Color Changes
+
+<Steps>
+  <Step title="Visual inspection">
+    Check all major sections:
+    - Hero banner
+    - Navigation buttons
+    - Section headings
+    - Form buttons
+    - Gallery overlays
+    - Footer
+  </Step>
+  
+  <Step title="Interactive elements">
+    Test hover states on:
+    - Navigation buttons (line 58-74 in style.css)
+    - Form submit buttons (line 399-416)
+    - Gallery cards (line 253-256)
+    - WhatsApp button (line 1568-1572)
+  </Step>
+  
+  <Step title="Gradient backgrounds">
+    Verify gradients appear correctly in:
+    - Hero section
+    - Clown hero section
+    - Inspiration section
+    - Gallery flip card backs
+  </Step>
+  
+  <Step title="Contrast and readability">
+    Ensure text is readable against all background colors, especially in:
+    - Hero sections with overlay text
+    - Gallery card descriptions
+    - Form labels and inputs
+  </Step>
+</Steps>
+
+## Advanced Color Customization
+
+### Adjusting Gradient Opacity
+
+Many gradients use rgba() values for transparency. Adjust the fourth parameter (alpha) to control opacity:
+
+```css
+/* More opaque */
+linear-gradient(135deg, rgba(41, 171, 226, 0.9), rgba(255, 107, 180, 0.9))
+
+/* More transparent */
+linear-gradient(135deg, rgba(41, 171, 226, 0.5), rgba(255, 107, 180, 0.5))
+```
+
+### Section-Specific Color Overrides
+
+If you need different colors for specific sections, you can override the variables locally:
+
+```css
+.nosotros-hero {
+    /* Override for About section only */
+    background: linear-gradient(135deg, #YOUR_COLOR_1, #YOUR_COLOR_2);
+}
+```
+
+## Common Color Locations
+
+| Element | File | Line | Variable Used |
+|---------|------|------|---------------|
+| Navigation active button | style.css | 66 | Gradient (yellow + pink) |
+| Section headings | style.css | 225, 336 | `--azul-siloe` |
+| Primary form button | style.css | 400 | `--azul-siloe` |
+| Clown form button | style.css | 420 | Gradient (yellow + pink) |
+| Gallery overlay | style.css | 1401 | Gradient (blue + pink) |
+| Footer links | style.css | 453 | `--azul-siloe` |
+
+## Related Documentation
+
+- [Content Customization](/customization/content) - Update text and messaging
+- [Images Customization](/customization/images) - Replace photos and graphics
+- [Forms Customization](/customization/forms) - Modify form styling

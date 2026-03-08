@@ -1,0 +1,407 @@
+---
+title: 'Volunteer Program'
+description: 'Hospital accompaniment and support for children and families'
+---
+
+## Overview
+
+The Volunteer Program is a core feature of Siloé Perú that enables volunteers to accompany children and families during their hospital stay at Hospital del Niño and in vulnerable communities throughout Peru.
+
+### Key Activities
+
+The volunteer program includes three main activities:
+
+<CardGroup cols={3}>
+  <Card title="Bedside Accompaniment" icon="bed">
+    Reading stories, board games, and active listening to reduce hospitalization stress
+  </Card>
+  <Card title="Family Support" icon="users">
+    Providing emotional support to parents from provinces who spend long hours at the hospital
+  </Card>
+  <Card title="Art Workshops" icon="palette">
+    Creative spaces where children can express themselves and forget their ailments for a moment
+  </Card>
+</CardGroup>
+
+## Interactive Gallery System
+
+The volunteer section features a 3D flip card gallery that showcases volunteer stories and impact. When users click on an image, it flips to reveal an inspirational message.
+
+### HTML Structure
+
+Each gallery item follows this structure from `index.html:66-84`:
+
+```html
+<div class="galeria-item">
+    <div class="galeria-flip-card">
+        <div class="galeria-flip-front">
+            <img src="./img voluntario/img2.png" alt="Voluntarios ayudando">
+            <div class="galeria-overlay">
+                <p>Juntos Somos Más Fuertes</p>
+            </div>
+        </div>
+        <div class="galeria-flip-back">
+            <div class="galeria-historia">
+                <p class="historia-titulo">🤝 Comunidad</p>
+                <p class="historia-texto">"Un voluntario es fuerte, pero una comunidad de voluntarios es invencible. Trabajamos juntos para crear un impacto tan grande que ningún niño se sienta abandonado."</p>
+                <p class="historia-autor">— Misión Siloé</p>
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+### CSS Classes for Gallery
+
+The gallery system uses these key CSS classes from `style.css`:
+
+<CodeGroup>
+```css Gallery Grid Layout (style.css:1356-1362)
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+```
+
+```css Gallery Item (style.css:1365-1373)
+.galeria-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    aspect-ratio: 1;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s ease;
+}
+```
+
+```css Large Gallery Items (style.css:1375-1384)
+.galeria-item-grande {
+    grid-column: span 1;
+}
+
+@media (min-width: 900px) {
+    .galeria-item-grande {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+}
+```
+</CodeGroup>
+
+### 3D Flip Card Animation
+
+The flip effect is achieved using CSS 3D transforms:
+
+<Steps>
+  <Step title="Flip Card Container">
+    The `.galeria-flip-card` container enables 3D perspective:
+    
+    ```css style.css:1440-1447
+    .galeria-flip-card {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+        cursor: pointer;
+    }
+    ```
+  </Step>
+  
+  <Step title="Flipped State">
+    When clicked, the `.flipped` class rotates the card 180 degrees:
+    
+    ```css style.css:1450-1452
+    .galeria-flip-card.flipped {
+        transform: rotateY(180deg);
+    }
+    ```
+  </Step>
+  
+  <Step title="Front Face">
+    The front shows the image with an overlay on hover:
+    
+    ```css style.css:1455-1460
+    .galeria-flip-front {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        backface-visibility: hidden;
+    }
+    ```
+  </Step>
+  
+  <Step title="Back Face">
+    The back face contains the story/message:
+    
+    ```css style.css:1463-1476
+    .galeria-flip-back {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        backface-visibility: hidden;
+        transform: rotateY(180deg);
+        background: linear-gradient(135deg, var(--azul-siloe), var(--rosa-vibrante));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    ```
+  </Step>
+</Steps>
+
+### JavaScript Click Handler
+
+The flip functionality is controlled by JavaScript in `index.html:831-854`:
+
+```javascript
+// Select all flip cards
+const flipCards = document.querySelectorAll('.galeria-flip-card');
+let currentFlipped = null; // Track currently flipped card
+
+// Add click listener to each card
+flipCards.forEach(card => {
+    card.addEventListener('click', function() {
+        // If another card is flipped, flip it back
+        if (currentFlipped && currentFlipped !== this) {
+            currentFlipped.classList.remove('flipped');
+        }
+        
+        // Toggle 'flipped' class on current card
+        this.classList.toggle('flipped');
+        
+        // Update reference to flipped card
+        if (this.classList.contains('flipped')) {
+            currentFlipped = this;
+        } else {
+            currentFlipped = null;
+        }
+    });
+});
+```
+
+<Note>
+The JavaScript ensures only one card is flipped at a time. When clicking a new card, the previously flipped card automatically flips back.
+</Note>
+
+## Volunteer Application Form
+
+The volunteer program includes a comprehensive application form that integrates with FormSubmit.co for email delivery.
+
+### Form Structure
+
+From `index.html:178-210`, the form includes these fields:
+
+```html
+<form class="volunteer-form" action="https://formsubmit.co/darlycampoverde@gmail.com" method="POST">
+    <div class="form-group">
+        <label for="nombre-voluntario">Nombre Completo *</label>
+        <input type="text" id="nombre-voluntario" name="Nombre Completo" 
+               placeholder="Tu nombre completo" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="dni-voluntario">DNI (Identificación) *</label>
+        <input type="text" id="dni-voluntario" name="DNI" 
+               placeholder="Tu número de DNI" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="telefono-voluntario">Número de Celular *</label>
+        <input type="tel" id="telefono-voluntario" name="Teléfono" 
+               placeholder="Tu teléfono de contacto" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="motivacion-voluntario">¿Por qué te gustaría apoyar? *</label>
+        <textarea id="motivacion-voluntario" name="Motivación" 
+                  placeholder="¿Por qué te gustaría apoyar en el Hospital del Niño?" 
+                  rows="5" required></textarea>
+    </div>
+    
+    <div class="form-group checkbox-group">
+        <input type="checkbox" id="aceptacion-voluntario" 
+               name="Aceptación" required style="width: auto;">
+        <label for="aceptacion-voluntario" style="width: auto;">
+            Acepto la política de privacidad y el uso de mis datos para la gestión del voluntariado.
+        </label>
+    </div>
+    
+    <button type="submit" class="btn-enviar">ENVIAR MI SOLICITUD</button>
+</form>
+```
+
+### Form Fields
+
+| Field Name | Type | Required | Purpose |
+|------------|------|----------|----------|
+| Nombre Completo | text | Yes | Volunteer's full name |
+| DNI | text | Yes | National identification number |
+| Teléfono | tel | Yes | Contact phone number |
+| Motivación | textarea | Yes | Why they want to volunteer |
+| Aceptación | checkbox | Yes | Privacy policy acceptance |
+
+### Form Styling
+
+The form uses these CSS classes from `style.css:329-427`:
+
+<CodeGroup>
+```css Form Section (style.css:329-332)
+.form-section { 
+    padding: 60px 20px; 
+    background: #f4f7f6; 
+}
+```
+
+```css Form Container (style.css:338-345)
+form { 
+    max-width: 550px; 
+    margin: 0 auto; 
+    background: white; 
+    padding: 40px; 
+    border-radius: 20px; 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); 
+}
+```
+
+```css Input Fields (style.css:361-377)
+input, textarea { 
+    width: 100%; 
+    padding: 15px; 
+    margin: 0;
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--azul-siloe);
+    box-shadow: 0 0 8px rgba(41, 171, 226, 0.2);
+}
+```
+
+```css Submit Button (style.css:399-416)
+.btn-enviar { 
+    background-color: var(--azul-siloe); 
+    color: white; 
+    padding: 15px; 
+    border: none; 
+    width: 100%; 
+    border-radius: 8px; 
+    font-weight: bold; 
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.btn-enviar:hover {
+    background-color: #1e8abc;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(41, 171, 226, 0.3);
+}
+```
+</CodeGroup>
+
+## FormSubmit.co Integration
+
+The form uses FormSubmit.co as a serverless email service:
+
+<Steps>
+  <Step title="Set Form Action">
+    Point the form action to FormSubmit's endpoint:
+    ```html
+    <form action="https://formsubmit.co/darlycampoverde@gmail.com" method="POST">
+    ```
+  </Step>
+  
+  <Step title="Name Input Fields">
+    Use descriptive `name` attributes that will appear in the email:
+    ```html
+    <input name="Nombre Completo" ...>
+    <input name="DNI" ...>
+    <input name="Teléfono" ...>
+    <textarea name="Motivación" ...></textarea>
+    ```
+  </Step>
+  
+  <Step title="Submit Form">
+    When submitted, FormSubmit sends an email with all field data to the specified email address.
+  </Step>
+</Steps>
+
+<Warning>
+FormSubmit requires email verification on first use. The recipient will receive a confirmation email to activate the endpoint.
+</Warning>
+
+## Adding New Gallery Items
+
+To add a new story to the volunteer gallery:
+
+<Steps>
+  <Step title="Choose Gallery Size">
+    Decide if the item should be regular or large:
+    - Regular: `<div class="galeria-item">`
+    - Large (2x2 grid): `<div class="galeria-item galeria-item-grande">`
+  </Step>
+  
+  <Step title="Add the HTML Structure">
+    Copy the flip card structure and customize:
+    ```html
+    <div class="galeria-item">
+        <div class="galeria-flip-card">
+            <div class="galeria-flip-front">
+                <img src="./img voluntario/your-image.jpg" alt="Description">
+                <div class="galeria-overlay">
+                    <p>Your Overlay Title</p>
+                </div>
+            </div>
+            <div class="galeria-flip-back">
+                <div class="galeria-historia">
+                    <p class="historia-titulo">📸 Your Icon & Title</p>
+                    <p class="historia-texto">"Your inspirational story or message here."</p>
+                    <p class="historia-autor">— Author Name</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    ```
+  </Step>
+  
+  <Step title="Place in Gallery Grid">
+    Add your new item inside the `.galeria-grid` container in the volunteer section (around line 66 in index.html).
+  </Step>
+  
+  <Step title="Test the Flip">
+    The JavaScript automatically attaches click handlers to all `.galeria-flip-card` elements, so no additional code is needed.
+  </Step>
+</Steps>
+
+## Color Variables
+
+The volunteer section uses these color variables defined in `style.css:4-11`:
+
+```css
+:root {
+    --azul-siloe: #29abe2;       /* Main blue color */
+    --celeste-claro: #e1f5fe;    /* Light blue for cards */
+    --gris-oscuro: #333;         /* Main text color */
+    --blanco: #ffffff;           /* Main background */
+    --amarillo-vibrante: #FFD700; /* Yellow accent */
+    --rosa-vibrante: #FF69B4;     /* Pink accent */
+}
+```
+
+<Note>
+The volunteer program primarily uses `--azul-siloe` (blue) for its branding, while the clown section uses the vibrant yellow and pink gradient.
+</Note>

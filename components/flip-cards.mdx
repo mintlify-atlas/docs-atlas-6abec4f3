@@ -1,0 +1,451 @@
+---
+title: Flip Cards
+description: Interactive 3D flip card gallery component with hover effects and click interactions
+---
+
+# Flip Cards
+
+The flip card component creates an interactive 3D gallery where images flip to reveal inspirational stories and testimonials. This component is used extensively in the Voluntariado and Clow sections to showcase impact stories.
+
+## Overview
+
+Flip cards provide an engaging way to display:
+- **Front side**: Image with hover overlay
+- **Back side**: Story, quote, or testimonial with gradient background
+- **3D rotation effect**: Smooth flip animation on click
+- **Single active card**: Only one card flips at a time
+
+## HTML Structure
+
+### Complete Flip Card
+
+```html index.html
+<div class="galeria-item">
+    <div class="galeria-flip-card">
+        <!-- Front of card (image) -->
+        <div class="galeria-flip-front">
+            <img src="./img voluntario/img2.png" alt="Voluntarios ayudando">
+            <div class="galeria-overlay">
+                <p>Juntos Somos Más Fuertes</p>
+            </div>
+        </div>
+        
+        <!-- Back of card (story) -->
+        <div class="galeria-flip-back">
+            <div class="galeria-historia">
+                <p class="historia-titulo">🤝 Comunidad</p>
+                <p class="historia-texto">"Un voluntario es fuerte, pero una comunidad de voluntarios es invencible. Trabajamos juntos para crear un impacto tan grande que ningún niño se sienta abandonado."</p>
+                <p class="historia-autor">— Misión Siloé</p>
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+### Gallery Grid Container
+
+```html index.html
+<section class="galeria-impacto">
+    <h2>Historias que Transforman Vidas</h2>
+    <p class="galeria-subtitulo">Cada momento cuenta. Cada sonrisa importa.</p>
+    
+    <div class="galeria-grid">
+        <!-- Multiple galeria-item elements here -->
+    </div>
+</section>
+```
+
+### Large Flip Card Variant
+
+```html index.html
+<div class="galeria-item galeria-item-grande">
+    <div class="galeria-flip-card">
+        <!-- Card content -->
+    </div>
+</div>
+```
+
+<Note>
+The `.galeria-item-grande` class makes cards span 2 columns and 2 rows on desktop for featured stories.
+</Note>
+
+## CSS Styling
+
+### Gallery Grid Layout
+
+```css style.css
+.galeria-impacto {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #f5f7fa, #fffbf0);
+    text-align: center;
+}
+
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+```
+
+### Flip Card Container
+
+```css style.css
+.galeria-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    aspect-ratio: 1;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s ease;
+    perspective: 1000px; /* Enable 3D transforms */
+}
+
+.galeria-item-grande {
+    grid-column: span 1;
+}
+
+@media (min-width: 900px) {
+    .galeria-item-grande {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+}
+```
+
+### 3D Flip Mechanism
+
+```css style.css
+.galeria-flip-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.6s;
+    transform-style: preserve-3d; /* Enable 3D space */
+    cursor: pointer;
+}
+
+/* Flipped state triggered by JavaScript */
+.galeria-flip-card.flipped {
+    transform: rotateY(180deg);
+}
+```
+
+### Front Side (Image)
+
+```css style.css
+.galeria-flip-front {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden; /* Hide when rotated */
+}
+
+.galeria-flip-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.galeria-item:hover img {
+    transform: scale(1.1);
+}
+```
+
+### Hover Overlay
+
+```css style.css
+.galeria-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(41, 171, 226, 0.85), rgba(255, 107, 180, 0.85));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    padding: 20px;
+}
+
+.galeria-item:hover .galeria-overlay {
+    opacity: 1;
+}
+
+.galeria-overlay p {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    margin: 0;
+    line-height: 1.4;
+}
+```
+
+### Back Side (Story)
+
+```css style.css
+.galeria-flip-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden; /* Hide until flipped */
+    transform: rotateY(180deg); /* Pre-rotated 180 degrees */
+    background: linear-gradient(135deg, var(--azul-siloe), var(--rosa-vibrante));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+```
+
+### Historia Content
+
+```css style.css
+.galeria-historia {
+    text-align: center;
+    color: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    overflow: hidden;
+    max-height: 100%;
+}
+
+.historia-titulo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+}
+
+.historia-texto {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin: 0;
+    font-style: italic;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    flex-grow: 1;
+    max-height: 65%;
+}
+
+.historia-autor {
+    font-size: 0.8rem;
+    margin: 0;
+    font-weight: bold;
+    opacity: 0.9;
+    flex-shrink: 0;
+}
+```
+
+## JavaScript Implementation
+
+### Click Handler for Flip Effect
+
+```javascript index.html
+document.addEventListener('DOMContentLoaded', function() {
+    // Select all flip cards
+    const flipCards = document.querySelectorAll('.galeria-flip-card');
+    let currentFlipped = null; // Track currently flipped card
+
+    // Add click listener to each card
+    flipCards.forEach(card => {
+        card.addEventListener('click', function() {
+            // If there's a different card already flipped, flip it back
+            if (currentFlipped && currentFlipped !== this) {
+                currentFlipped.classList.remove('flipped');
+            }
+            
+            // Toggle the 'flipped' class on clicked card
+            this.classList.toggle('flipped');
+            
+            // Update reference to currently flipped card
+            if (this.classList.contains('flipped')) {
+                currentFlipped = this;
+            } else {
+                currentFlipped = null;
+            }
+        });
+    });
+});
+```
+
+<Note>
+The JavaScript ensures only one card is flipped at a time. Clicking a new card automatically flips the previous one back.
+</Note>
+
+## Creating New Flip Cards
+
+<Steps>
+  <Step title="Add the container">
+    Create a new `.galeria-item` in the grid:
+    ```html
+    <div class="galeria-item">
+        <div class="galeria-flip-card">
+            <!-- Content goes here -->
+        </div>
+    </div>
+    ```
+  </Step>
+  
+  <Step title="Add the front (image) side">
+    ```html
+    <div class="galeria-flip-front">
+        <img src="./path/to/image.jpg" alt="Description">
+        <div class="galeria-overlay">
+            <p>Overlay Text</p>
+        </div>
+    </div>
+    ```
+  </Step>
+  
+  <Step title="Add the back (story) side">
+    ```html
+    <div class="galeria-flip-back">
+        <div class="galeria-historia">
+            <p class="historia-titulo">🎯 Title</p>
+            <p class="historia-texto">"Your story or quote goes here. Make it meaningful and inspiring."</p>
+            <p class="historia-autor">— Author Name</p>
+        </div>
+    </div>
+    ```
+  </Step>
+  
+  <Step title="Optional: Make it large">
+    For featured cards, add the `galeria-item-grande` class:
+    ```html
+    <div class="galeria-item galeria-item-grande">
+        <!-- Will span 2x2 grid cells on desktop -->
+    </div>
+    ```
+  </Step>
+</Steps>
+
+## Gallery Variants
+
+<Tabs>
+  <Tab title="Volunteer Gallery">
+    ```css
+    .galeria-impacto {
+        background: linear-gradient(135deg, #f5f7fa, #fffbf0);
+    }
+    
+    .galeria-impacto h2 {
+        color: var(--azul-siloe);
+    }
+    ```
+  </Tab>
+  
+  <Tab title="Clown Gallery">
+    ```css
+    .galeria-clow {
+        background: linear-gradient(135deg, #fff4e6, #ffe8cc);
+    }
+    
+    .galeria-clow h2 {
+        color: var(--rosa-vibrante);
+    }
+    ```
+  </Tab>
+  
+  <Tab title="Aliados Gallery">
+    ```css
+    .galeria-aliados {
+        background: linear-gradient(135deg, #e8f4f8, #f0e8f8);
+    }
+    
+    .galeria-aliados h2 {
+        color: var(--azul-siloe);
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Complete Example
+
+<CodeGroup>
+
+```html HTML Structure
+<section class="galeria-impacto">
+    <h2>Historias que Transforman Vidas</h2>
+    <p class="galeria-subtitulo">Cada momento cuenta. Cada sonrisa importa.</p>
+    
+    <div class="galeria-grid">
+        <div class="galeria-item">
+            <div class="galeria-flip-card">
+                <div class="galeria-flip-front">
+                    <img src="./img/photo.jpg" alt="Description">
+                    <div class="galeria-overlay">
+                        <p>Momentos de Alegría</p>
+                    </div>
+                </div>
+                <div class="galeria-flip-back">
+                    <div class="galeria-historia">
+                        <p class="historia-titulo">😊 Alegría</p>
+                        <p class="historia-texto">"En el hospital, la risa es acto de resistencia. La alegría es la mejor medicina."</p>
+                        <p class="historia-autor">— Voluntario Siloé</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+```
+
+```javascript JavaScript Handler
+document.addEventListener('DOMContentLoaded', function() {
+    const flipCards = document.querySelectorAll('.galeria-flip-card');
+    let currentFlipped = null;
+
+    flipCards.forEach(card => {
+        card.addEventListener('click', function() {
+            if (currentFlipped && currentFlipped !== this) {
+                currentFlipped.classList.remove('flipped');
+            }
+            this.classList.toggle('flipped');
+            if (this.classList.contains('flipped')) {
+                currentFlipped = this;
+            } else {
+                currentFlipped = null;
+            }
+        });
+    });
+});
+```
+
+</CodeGroup>
+
+## Key Features
+
+- **3D CSS Transforms**: Uses `transform-style: preserve-3d` and `backface-visibility: hidden`
+- **Smooth Animations**: 0.6s transition for flip, 0.4s for hover effects
+- **Responsive Grid**: Adapts from 1 column on mobile to multiple columns on desktop
+- **Single Active State**: Only one card flipped at a time for better UX
+- **Accessible**: Click interaction works with keyboard navigation
+- **Performance**: CSS-only animations with minimal JavaScript
+
+## Browser Compatibility
+
+<Note>
+The 3D flip effect requires support for CSS 3D transforms and `backface-visibility`. Works in all modern browsers (Chrome, Firefox, Safari, Edge).
+</Note>
+
+## Best Practices
+
+1. **Use square images**: The `aspect-ratio: 1` ensures cards are perfect squares
+2. **Keep text concise**: Back side has limited space, especially on mobile
+3. **High contrast**: White text on gradient backgrounds ensures readability
+4. **Meaningful emojis**: Use emojis in `historia-titulo` to add visual interest
+5. **Test on mobile**: Ensure flip effect works smoothly on touch devices
+6. **Alt text**: Always include descriptive alt text for images

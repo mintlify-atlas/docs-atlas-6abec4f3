@@ -1,0 +1,564 @@
+---
+title: 'Image Customization'
+description: 'Learn how to replace and optimize images throughout the website'
+icon: 'image'
+---
+
+## Overview
+
+The Siloé Perú website uses images throughout the gallery sections, backgrounds, and interactive flip cards. All images are stored in subdirectories within the `img` folder alongside the source files.
+
+## Image Directory Structure
+
+Images are organized in two main directories:
+
+```
+~/workspace/source/
+├── index.html
+├── style.css
+└── img voluntario/        # Volunteer section images
+    ├── fondo.png
+    ├── img2.png
+    ├── img entrega de pañales.jpg
+    ├── img voluntario navidad.jpg
+    ├── img voluntario navidad2.2
+    ├── img voluntarios navidad 2.1
+    └── 540412289_18218662465307271_3984022991253073857_n.png
+└── img clow/              # Clown section images
+    ├── 568201215_18225647026307271_8015100808044120281_n.png
+    ├── 606679523_18233751487307271_2653071027915695311_n.png
+    ├── 570037802_18225646981307271_7083655908308813644_n.png
+    ├── 641773809_18241087081307271_7081150706072675463_n.png
+    ├── 620990517_18237125605307271_569971132472878260_n.png
+    ├── 641776311_18241087003307271_2305698428489149300_n.png
+    ├── 642631975_18241087042307271_3713862490567410574_n.png
+    └── ultima clow.png
+└── img logo de mensajeria.png  # WhatsApp button icon
+```
+
+<Tip>
+  The directory name "img voluntario" has a space in it. When referencing it in HTML, keep the space: `./img voluntario/filename.jpg`
+</Tip>
+
+## Supported Image Formats
+
+The website supports standard web image formats:
+
+- **PNG** - Best for logos, graphics with transparency
+- **JPG/JPEG** - Best for photographs
+- **SVG** - Best for vector graphics and icons
+- **GIF** - For simple animations
+- **WebP** - Modern format for better compression (recommended)
+
+<Warning>
+  Always optimize images before uploading to ensure fast page load times. Large unoptimized images can significantly slow down your website.
+</Warning>
+
+## Hero Background Image
+
+### Main Hero Banner
+
+**Location:** `index.html:17`
+
+```html
+<section class="hero" style="background-image: linear-gradient(135deg, rgba(41, 171, 226, 0.75), rgba(255, 107, 180, 0.75)), url('./img voluntario/fondo.png'); background-size: cover; background-position: center; background-attachment: fixed;">
+```
+
+The hero section uses a gradient overlay on top of the background image.
+
+<Steps>
+  <Step title="Prepare your image">
+    Use a high-quality image (at least 1920x1080px) that represents your organization
+  </Step>
+  
+  <Step title="Add to img voluntario folder">
+    Save your image in `~/workspace/source/img voluntario/` with a descriptive name like `hero-background.jpg`
+  </Step>
+  
+  <Step title="Update the HTML">
+    Replace `fondo.png` with your image filename:
+    ```html
+    url('./img voluntario/hero-background.jpg')
+    ```
+  </Step>
+  
+  <Step title="Adjust gradient opacity (optional)">
+    If your image is too dark/light, adjust the gradient opacity values (currently `0.75`):
+    ```html
+    <!-- More transparent (shows more image) -->
+    linear-gradient(135deg, rgba(41, 171, 226, 0.5), rgba(255, 107, 180, 0.5))
+    
+    <!-- More opaque (darker overlay) -->
+    linear-gradient(135deg, rgba(41, 171, 226, 0.9), rgba(255, 107, 180, 0.9))
+    ```
+  </Step>
+</Steps>
+
+## Gallery Images - Volunteer Section
+
+The volunteer gallery includes flip cards with images on the front. Each card shows a story when clicked.
+
+### Gallery Image Structure
+
+**Example:** `index.html:68-84`
+
+```html
+<div class="galeria-item">
+    <div class="galeria-flip-card">
+        <div class="galeria-flip-front">
+            <img src="./img voluntario/img2.png" alt="Voluntarios ayudando">
+            <div class="galeria-overlay">
+                <p>Juntos Somos Más Fuertes</p>
+            </div>
+        </div>
+        <div class="galeria-flip-back">
+            <div class="galeria-historia">
+                <p class="historia-titulo">🤝 Comunidad</p>
+                <p class="historia-texto">"Un voluntario es fuerte, pero una comunidad de voluntarios es invencible..."</p>
+                <p class="historia-autor">— Misión Siloé</p>
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+### Current Volunteer Gallery Images
+
+| Image File | Line | Description |
+|------------|------|-------------|
+| `img2.png` | 71 | Volunteers helping |
+| `img entrega de pañales.jpg` | 89 | Delivery of supplies |
+| `img voluntario navidad.jpg` | 107 | Christmas volunteering |
+| `img voluntario navidad2.2` | 125 | Christmas hope |
+| `540412289_18218662465307271_3984022991253073857_n.png` | 143 | Family support |
+| `img voluntarios navidad 2.1` | 161 | Creating memories |
+
+<Tip>
+  For best results, use square images (1:1 aspect ratio) for gallery items. Recommended size: 800x800px minimum.
+</Tip>
+
+## Gallery Images - Clown Section
+
+The clown section has its own gallery showcasing the clown volunteer program.
+
+### Current Clown Gallery Images
+
+| Image File | Line | Size Class | Description |
+|------------|------|------------|-------------|
+| `568201215_18225647026307271_8015100808044120281_n.png` | 273 | Small | Transforming smiles |
+| `606679523_18233751487307271_2653071027915695311_n.png` | 292 | Small | Clowns in action |
+| `570037802_18225646981307271_7083655908308813644_n.png` | 311 | Small | Therapeutic joy |
+| `641773809_18241087081307271_7081150706072675463_n.png` | 330 | Small | Shared laughter |
+| `620990517_18237125605307271_569971132472878260_n.png` | 349 | Small | Heart magic |
+| `641776311_18241087003307271_2305698428489149300_n.png` | 368 | Small | Hope and fun |
+| `642631975_18241087042307271_3713862490567410574_n.png` | 387 | Small | Red nose volunteers |
+| `ultima clow.png` | 406 | Small | Last experience |
+
+<Note>
+  Some gallery items use the `galeria-item-grande` class (lines 104, 122) which makes them span 2 columns on larger screens. You can add or remove this class to control gallery layout.
+</Note>
+
+## Replacing Gallery Images
+
+<Steps>
+  <Step title="Prepare your images">
+    - Use high-quality photos (minimum 800x800px)
+    - Crop to square aspect ratio (1:1) for consistency
+    - Optimize file size (aim for under 200KB per image)
+  </Step>
+  
+  <Step title="Add images to appropriate folder">
+    - Volunteer images: `~/workspace/source/img voluntario/`
+    - Clown images: `~/workspace/source/img clow/`
+  </Step>
+  
+  <Step title="Update HTML references">
+    Find the `<img src="..." alt="...">` tag and update:
+    ```html
+    <!-- Old -->
+    <img src="./img voluntario/img2.png" alt="Voluntarios ayudando">
+    
+    <!-- New -->
+    <img src="./img voluntario/new-photo.jpg" alt="Descriptive alt text">
+    ```
+  </Step>
+  
+  <Step title="Update alt text">
+    Always provide descriptive alt text for accessibility:
+    ```html
+    <img src="./img voluntario/kids-smiling.jpg" alt="Children smiling with volunteers">
+    ```
+  </Step>
+  
+  <Step title="Update overlay text (optional)">
+    Update the text that appears when hovering:
+    ```html
+    <div class="galeria-overlay">
+        <p>Your New Caption</p>
+    </div>
+    ```
+  </Step>
+</Steps>
+
+## Adding New Gallery Items
+
+To add more images to the gallery:
+
+<Steps>
+  <Step title="Copy an existing gallery item">
+    Copy the entire `<div class="galeria-item">` block (including all nested divs)
+  </Step>
+  
+  <Step title="Paste before closing gallery-grid">
+    Insert the copied block before `</div><!-- closing galeria-grid -->`
+  </Step>
+  
+  <Step title="Update image source">
+    Change the `src` attribute to point to your new image
+  </Step>
+  
+  <Step title="Update all text content">
+    - Overlay caption
+    - Story title
+    - Story text
+    - Author attribution
+  </Step>
+</Steps>
+
+### Example: Adding a New Volunteer Gallery Item
+
+```html
+<!-- Add this before </div> that closes galeria-grid -->
+<div class="galeria-item">
+    <div class="galeria-flip-card">
+        <div class="galeria-flip-front">
+            <img src="./img voluntario/new-activity.jpg" alt="New volunteer activity">
+            <div class="galeria-overlay">
+                <p>Nueva Iniciativa</p>
+            </div>
+        </div>
+        <div class="galeria-flip-back">
+            <div class="galeria-historia">
+                <p class="historia-titulo">✨ Innovación</p>
+                <p class="historia-texto">
+                    "Siempre buscamos nuevas formas de llevar alegría y esperanza a quienes más lo necesitan. 
+                    Cada iniciativa nace del corazón y se transforma en sonrisas."
+                </p>
+                <p class="historia-autor">— Tu Organización</p>
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+## Large Gallery Items
+
+Some gallery items can span 2 columns and 2 rows on larger screens using the `galeria-item-grande` class.
+
+<CodeGroup>
+```html Small Item (1x1)
+<div class="galeria-item">
+    <!-- content -->
+</div>
+```
+
+```html Large Item (2x2)
+<div class="galeria-item galeria-item-grande">
+    <!-- content -->
+</div>
+```
+</CodeGroup>
+
+**Current large items:**
+- Line 104: Volunteer Christmas photo
+- Line 122: Hope medicine photo
+
+<Tip>
+  Use the large format for your most impactful images. Limit to 1-2 large items per gallery to maintain visual balance.
+</Tip>
+
+## WhatsApp Button Icon
+
+### Current Icon
+
+**Location:** `index.html:715`
+
+```html
+<div class="whatsapp-container">
+    <a href="https://wa.me/51930917199" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" title="Contáctanos por WhatsApp">
+        <img src="./img logo de mensajeria.png" alt="WhatsApp">
+    </a>
+    <p class="whatsapp-label">Contactate con nosotros</p>
+</div>
+```
+
+### Customizing the WhatsApp Button
+
+<Steps>
+  <Step title="Prepare icon image">
+    - Use a square image (recommended: 120x120px)
+    - PNG format with transparency works best
+    - Can be WhatsApp logo or custom messaging icon
+  </Step>
+  
+  <Step title="Replace image file">
+    Save your new icon as `img logo de mensajeria.png` or use a new filename and update the HTML
+  </Step>
+  
+  <Step title="Update WhatsApp number">
+    Change `51930917199` to your organization's WhatsApp number (with country code, no spaces):
+    ```html
+    <a href="https://wa.me/1234567890" ...>
+    ```
+  </Step>
+  
+  <Step title="Update label text">
+    Modify the text below the button:
+    ```html
+    <p class="whatsapp-label">Chat with us</p>
+    ```
+  </Step>
+</Steps>
+
+## Image Optimization
+
+### Why Optimize?
+
+Unoptimized images can:
+- Slow down page load times
+- Consume excessive bandwidth
+- Hurt SEO rankings
+- Provide poor mobile experience
+
+### Optimization Guidelines
+
+<CardGroup cols={2}>
+  <Card title="Hero Background" icon="panorama">
+    - **Format:** JPG or WebP
+    - **Dimensions:** 1920x1080px
+    - **File size:** Under 300KB
+  </Card>
+  
+  <Card title="Gallery Photos" icon="images">
+    - **Format:** JPG or WebP
+    - **Dimensions:** 800x800px
+    - **File size:** Under 150KB
+  </Card>
+  
+  <Card title="Icons" icon="icons">
+    - **Format:** PNG or SVG
+    - **Dimensions:** 120x120px
+    - **File size:** Under 20KB
+  </Card>
+  
+  <Card title="Logos" icon="bookmark">
+    - **Format:** PNG or SVG
+    - **Dimensions:** Variable
+    - **File size:** Under 50KB
+  </Card>
+</CardGroup>
+
+### Optimization Tools
+
+**Online Tools:**
+- [TinyPNG](https://tinypng.com/) - PNG and JPG compression
+- [Squoosh](https://squoosh.app/) - Advanced image optimization
+- [ImageOptim](https://imageoptim.com/) - Mac app for batch optimization
+- [JPEG-Optimizer](http://jpeg-optimizer.com/) - JPG optimization
+
+**Command Line:**
+```bash
+# Using ImageMagick
+convert input.jpg -resize 800x800 -quality 85 output.jpg
+
+# Using cwebp for WebP format
+cwebp -q 80 input.jpg -o output.webp
+```
+
+<Steps>
+  <Step title="Resize to appropriate dimensions">
+    Don't use images larger than needed. Gallery images rarely need to exceed 800x800px.
+  </Step>
+  
+  <Step title="Compress the image">
+    Use tools like TinyPNG to reduce file size without visible quality loss.
+  </Step>
+  
+  <Step title="Choose the right format">
+    - Photos: JPG or WebP
+    - Graphics with transparency: PNG
+    - Simple logos: SVG
+  </Step>
+  
+  <Step title="Test page load speed">
+    Use Google PageSpeed Insights to verify improvements.
+  </Step>
+</Steps>
+
+## Responsive Images
+
+The gallery automatically adapts to different screen sizes thanks to CSS:
+
+**Gallery Grid:** `style.css:1356-1362`
+```css
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+```
+
+**Gallery Item:** `style.css:1365-1373`
+```css
+.galeria-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    aspect-ratio: 1;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s ease;
+}
+```
+
+The `aspect-ratio: 1` ensures all images maintain a square shape regardless of original dimensions.
+
+## Image Alt Text Best Practices
+
+### Why Alt Text Matters
+
+1. **Accessibility** - Screen readers use alt text to describe images to visually impaired users
+2. **SEO** - Search engines use alt text to understand image content
+3. **Fallback** - Displays when images fail to load
+
+### Writing Good Alt Text
+
+<CardGroup cols={2}>
+  <Card title="✅ Good" icon="check">
+    ```html
+    <img src="volunteer.jpg" 
+         alt="Volunteer reading a book to a smiling child in hospital bed">
+    ```
+    Descriptive, specific, contextual
+  </Card>
+  
+  <Card title="❌ Bad" icon="xmark">
+    ```html
+    <img src="img2.png" 
+         alt="Image 2">
+    ```
+    Generic, unhelpful, no context
+  </Card>
+</CardGroup>
+
+### Alt Text Guidelines
+
+- **Be descriptive** - Explain what's in the image
+- **Be concise** - Aim for 125 characters or less
+- **Include context** - Explain why the image matters
+- **Skip "image of"** - Screen readers already announce "image"
+- **Don't use decorative images** - Use `alt=""` for purely decorative images
+
+## Testing Your Images
+
+<Steps>
+  <Step title="Visual inspection">
+    Check all images display correctly across the site:
+    - Hero background
+    - Volunteer gallery (6 images)
+    - Clown gallery (8 images)
+    - WhatsApp button icon
+  </Step>
+  
+  <Step title="Test responsive behavior">
+    Resize browser window or use device emulation to verify:
+    - Images scale properly
+    - Gallery grid adjusts to screen size
+    - No images appear stretched or pixelated
+  </Step>
+  
+  <Step title="Test flip card functionality">
+    Click each gallery image to ensure:
+    - Flip animation works smoothly
+    - Story text is readable on the back
+    - Images don't distort during flip
+  </Step>
+  
+  <Step title="Check load performance">
+    Use browser dev tools to:
+    - Verify image file sizes are reasonable
+    - Check total page load time
+    - Ensure images load progressively
+  </Step>
+  
+  <Step title="Test on mobile">
+    Verify on actual mobile devices:
+    - Images load quickly on mobile networks
+    - Touch interactions work for flip cards
+    - Images are appropriately sized
+  </Step>
+</Steps>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Image not displaying">
+    - Verify the file path is correct (check spelling and directory)
+    - Ensure the image file exists in the specified location
+    - Check file name matches exactly (case-sensitive)
+    - Verify image format is supported (.jpg, .png, .gif, .svg, .webp)
+    - Check browser console for 404 errors
+  </Accordion>
+  
+  <Accordion title="Image looks stretched or distorted">
+    - Use square images (1:1 aspect ratio) for gallery items
+    - The CSS `aspect-ratio: 1` forces square display
+    - Pre-crop images to square before uploading
+    - Use `object-fit: cover` in CSS if you must use non-square images
+  </Accordion>
+  
+  <Accordion title="Flip card not working">
+    - Ensure you haven't accidentally deleted the JavaScript at the bottom of `index.html` (lines 830-854)
+    - Check browser console for JavaScript errors
+    - Verify the complete HTML structure is intact for flip cards
+    - Clear browser cache and reload
+  </Accordion>
+  
+  <Accordion title="Images loading slowly">
+    - Optimize images to reduce file size
+    - Use appropriate dimensions (don't use 4000px images for 800px display)
+    - Consider using WebP format for better compression
+    - Implement lazy loading for below-the-fold images
+  </Accordion>
+  
+  <Accordion title="WhatsApp button not showing">
+    - Verify `img logo de mensajeria.png` exists
+    - Check the file path in line 715 of index.html
+    - Ensure CSS for `.whatsapp-container` is intact (style.css:1535-1544)
+    - Check if button is hidden behind other elements (use z-index)
+  </Accordion>
+</AccordionGroup>
+
+## Advanced: Lazy Loading Images
+
+For better performance, you can implement lazy loading for gallery images:
+
+```html
+<img src="./img voluntario/img2.png" 
+     alt="Voluntarios ayudando"
+     loading="lazy">
+```
+
+The `loading="lazy"` attribute tells the browser to only load images when they're about to enter the viewport.
+
+<Tip>
+  Don't use lazy loading on the hero background or above-the-fold images, as this can delay initial page rendering.
+</Tip>
+
+## Related Documentation
+
+- [Content Customization](/customization/content) - Update gallery story text
+- [Colors Customization](/customization/colors) - Change gallery overlay colors
+- [Forms Customization](/customization/forms) - Add image upload to forms

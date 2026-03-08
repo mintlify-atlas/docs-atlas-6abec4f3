@@ -1,0 +1,403 @@
+---
+title: 'Partnerships'
+description: 'Strategic partnerships with institutions committed to social transformation'
+---
+
+## Overview
+
+The Partnerships section showcases Siloé Perú's strategic alliances with institutions committed to transforming lives through solidarity and volunteerism. The primary partner featured is Universidad Peruana de Ciencias Aplicadas (UPC).
+
+## Partnerships Hero Section
+
+The partnerships section starts with a vibrant hero banner that introduces the concept of collaborative impact.
+
+### HTML Structure
+
+From `index.html:474-478`, the hero section:
+
+```html
+<section class="aliados-hero" 
+         style="background: linear-gradient(135deg, rgba(41, 171, 226, 0.75), rgba(255, 107, 180, 0.75)); 
+                padding: 60px 20px; 
+                text-align: center; 
+                color: white;">
+    <h1>🤝 Nuestros Aliados</h1>
+    <p>Instituciones comprometidas con transformar vidas a través de la solidaridad y el voluntariado.</p>
+    <p style="font-style: italic; margin-top: 20px;">Juntos, hacemos la diferencia</p>
+</section>
+```
+
+### Hero Styling
+
+The hero section uses CSS from `style.css:895-909`:
+
+<CodeGroup>
+```css Hero Background (style.css:895-898)
+.aliados-hero {
+    background: linear-gradient(135deg, rgba(41, 171, 226, 0.75), rgba(255, 107, 180, 0.75));
+    color: white;
+}
+```
+
+```css Title Styling (style.css:900-904)
+.aliados-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+```
+
+```css Description Text (style.css:906-909)
+.aliados-hero p {
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+```
+</CodeGroup>
+
+## UPC Partnership Section
+
+The main partnership information section provides detailed information about the collaboration with Universidad Peruana de Ciencias Aplicadas.
+
+### Partnership Information Structure
+
+From `index.html:481-505`, the UPC partnership content:
+
+```html
+<section class="aliados-info">
+    <h2>Universidad Peruana de Ciencias Aplicadas - UPC</h2>
+    <div class="aliado-contenido">
+        <div class="aliado-texto">
+            <h3>Nuestra Alianza Estratégica</h3>
+            <p>
+                La Universidad Peruana de Ciencias Aplicadas es un partner clave en nuestra misión de transformar vidas. 
+                Colaboramos en proyectos de responsabilidad social universitaria, brindando oportunidades a estudiantes 
+                de diferentes carreras para participar en nuestras iniciativas de voluntariado en el Hospital del Niño 
+                y comunidades vulnerables.
+            </p>
+            <p>
+                Los estudiantes de UPC aportan energía, creatividad e ilusión, generando un impacto significativo en la vida 
+                de los niños hospitalizados. Esta alianza fortalece el compromiso de ambas instituciones con la responsabilidad 
+                social y la transformación de la sociedad peruana.
+            </p>
+            <ul style="margin-top: 20px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">
+                <li style="margin-bottom: 12px;"><strong>Voluntariado Académico:</strong> Estudiantes de diversas carreras participan en nuestros programas</li>
+                <li style="margin-bottom: 12px;"><strong>Investigación Social:</strong> Proyectos de investigación sobre impacto de voluntariado</li>
+                <li style="margin-bottom: 12px;"><strong>Capacitación:</strong> Talleres y entrenamientos para voluntarios de UPC</li>
+                <li><strong>Apoyo Institucional:</strong> Recursos y espacio para desarrollar nuestros proyectos</li>
+            </ul>
+        </div>
+    </div>
+</section>
+```
+
+### Information Section Styling
+
+The partnership information uses these styles from `style.css:912-963`:
+
+<Tabs>
+  <Tab title="Section Layout">
+    ```css style.css:912-917
+    .aliados-info {
+        padding: 60px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+    }
+    ```
+  </Tab>
+  
+  <Tab title="Section Title">
+    ```css style.css:919-924
+    .aliados-info h2 {
+        font-size: 2.3rem;
+        color: var(--azul-siloe);
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    ```
+  </Tab>
+  
+  <Tab title="Content Container">
+    ```css style.css:926-930
+    .aliado-contenido {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+    }
+    ```
+  </Tab>
+  
+  <Tab title="Text Styling">
+    ```css style.css:932-963
+    .aliado-texto {
+        flex: 1;
+        color: var(--gris-oscuro);
+        line-height: 1.8;
+    }
+    
+    .aliado-texto h3 {
+        font-size: 1.8rem;
+        color: var(--azul-siloe);
+        margin-bottom: 20px;
+        font-family: 'Playfair Display', serif;
+    }
+    
+    .aliado-texto p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+        text-align: justify;
+    }
+    
+    .aliado-texto ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+    
+    .aliado-texto li {
+        font-size: 1rem;
+        color: var(--gris-oscuro);
+    }
+    
+    .aliado-texto li strong {
+        color: var(--azul-siloe);
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Partnership Benefits List
+
+The UPC partnership showcases four key collaboration areas:
+
+<CardGroup cols={2}>
+  <Card title="Voluntariado Académico" icon="graduation-cap">
+    Students from various academic programs participate in volunteer initiatives
+  </Card>
+  
+  <Card title="Investigación Social" icon="magnifying-glass">
+    Research projects studying the impact of volunteer work on communities
+  </Card>
+  
+  <Card title="Capacitación" icon="chalkboard-user">
+    Workshops and training sessions for UPC volunteers
+  </Card>
+  
+  <Card title="Apoyo Institucional" icon="building">
+    Resources and space provided by UPC to develop social projects
+  </Card>
+</CardGroup>
+
+### List Styling
+
+The benefits list uses inline styles and CSS classes:
+
+```html
+<ul style="margin-top: 20px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">
+    <li style="margin-bottom: 12px;">
+        <strong>Voluntariado Académico:</strong> Estudiantes de diversas carreras participan en nuestros programas
+    </li>
+    <!-- More list items... -->
+</ul>
+```
+
+<Note>
+The `<strong>` tags for benefit titles are styled with `color: var(--azul-siloe)` via CSS to maintain brand consistency.
+</Note>
+
+## Partnership Gallery Section
+
+The partnerships section includes a gallery area for showcasing collaborative moments.
+
+### Gallery Structure
+
+From `index.html:508-519`:
+
+```html
+<section class="galeria-impacto galeria-aliados">
+    <h2>Momentos de Impacto</h2>
+    <p class="galeria-subtitulo">Estudiantes de UPC transformando vidas junto a Siloé.</p>
+    
+    <div class="galeria-grid">
+        <!-- Placeholder - User will add images later -->
+        <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: #999;">
+            <p style="font-size: 1.2rem; margin-bottom: 10px;">📸 Galería de Imágenes</p>
+            <p>Las imágenes de nuestros momentos con UPC irán aquí. Próximamente.</p>
+        </div>
+    </div>
+</section>
+```
+
+### Gallery Styling
+
+The partnership gallery uses special background colors from `style.css:966-972`:
+
+```css
+/* Gallery for partnerships */
+.galeria-aliados {
+    background: linear-gradient(135deg, #e8f4f8, #f0e8f8);
+}
+
+.galeria-aliados h2 {
+    color: var(--azul-siloe);
+}
+```
+
+<Note>
+The partnership gallery uses a softer blue-to-purple gradient (`#e8f4f8` to `#f0e8f8`) compared to the volunteer and clown galleries, creating a distinct visual identity.
+</Note>
+
+## Adding New Partners
+
+To add a new partnership to the page:
+
+<Steps>
+  <Step title="Duplicate the aliados-info section">
+    Copy the entire `<section class="aliados-info">` block as a template.
+  </Step>
+  
+  <Step title="Update partner information">
+    Modify the content:
+    ```html
+    <section class="aliados-info">
+        <h2>New Partner Organization Name</h2>
+        <div class="aliado-contenido">
+            <div class="aliado-texto">
+                <h3>Partnership Description</h3>
+                <p>Details about the collaboration...</p>
+                <ul>
+                    <li><strong>Benefit 1:</strong> Description</li>
+                    <li><strong>Benefit 2:</strong> Description</li>
+                    <!-- Add more benefits -->
+                </ul>
+            </div>
+        </div>
+    </section>
+    ```
+  </Step>
+  
+  <Step title="Add partner logo (optional)">
+    You can add a logo image inside the `.aliado-contenido` div:
+    ```html
+    <div class="aliado-contenido">
+        <img src="./img/partner-logo.png" alt="Partner Name" style="max-width: 200px;">
+        <div class="aliado-texto">
+            <!-- Content -->
+        </div>
+    </div>
+    ```
+  </Step>
+  
+  <Step title="Add partnership gallery">
+    Each partner can have their own gallery section following the same structure as UPC.
+  </Step>
+</Steps>
+
+## Responsive Design
+
+The partnerships section adapts to mobile devices from `style.css:975-996`:
+
+```css
+@media (max-width: 768px) {
+    .aliado-contenido {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .aliados-info h2 {
+        font-size: 1.8rem;
+    }
+    
+    .aliado-texto h3 {
+        font-size: 1.5rem;
+    }
+    
+    .aliado-texto p {
+        text-align: left;
+    }
+    
+    .aliados-hero h1 {
+        font-size: 2rem;
+    }
+}
+```
+
+### Responsive Behavior
+
+<Tabs>
+  <Tab title="Desktop (>768px)">
+    - Content and images display side-by-side using flexbox
+    - Large typography (h1: 3rem, h2: 2.3rem)
+    - Text is justified for professional appearance
+  </Tab>
+  
+  <Tab title="Mobile (≤768px)">
+    - Content stacks vertically (flex-direction: column)
+    - Reduced typography (h1: 2rem, h2: 1.8rem)
+    - Text alignment changes from justified to left for easier reading
+    - Increased gap between elements (30px)
+  </Tab>
+</Tabs>
+
+## Section Navigation
+
+The partnerships section is toggled using the navigation system from `index.html:34-36`:
+
+```html
+<button id="btn-aliados" class="nav-btn">
+    🤝 Nuestros Aliados
+</button>
+```
+
+The JavaScript navigation handler from `index.html:810-815`:
+
+```javascript
+if (btnAliados) {
+    btnAliados.addEventListener('click', function(e) {
+        e.preventDefault();
+        mostrarSeccion('aliados');
+    });
+}
+```
+
+<Note>
+The partnerships section uses the same show/hide mechanism as other sections via the `seccion-activa` and `seccion-inactiva` classes. See the [Interactive Gallery documentation](/features/interactive-gallery#section-toggling) for details.
+</Note>
+
+## Best Practices
+
+When documenting partnerships:
+
+<CardGroup cols={2}>
+  <Card title="Be Specific" icon="bullseye">
+    List concrete collaboration outcomes and benefits rather than vague statements
+  </Card>
+  
+  <Card title="Show Impact" icon="chart-line">
+    Include numbers, student testimonials, or measurable results when possible
+  </Card>
+  
+  <Card title="Visual Evidence" icon="camera">
+    Add photos of collaborative events to the gallery section
+  </Card>
+  
+  <Card title="Maintain Consistency" icon="equals">
+    Use the same structure for all partners to create a cohesive experience
+  </Card>
+</CardGroup>
+
+## Color Scheme
+
+The partnerships section uses a balanced color palette:
+
+| Element | Color | Variable |
+|---------|-------|----------|
+| Hero Background | Blue-Pink Gradient | `rgba(41, 171, 226, 0.75)` → `rgba(255, 107, 180, 0.75)` |
+| Section Title | Blue | `var(--azul-siloe)` (#29abe2) |
+| Gallery Background | Blue-Purple Gradient | `#e8f4f8` → `#f0e8f8` |
+| Body Text | Dark Gray | `var(--gris-oscuro)` (#333) |
+| Strong Text | Blue | `var(--azul-siloe)` |
+
+<Warning>
+The partnerships section primarily uses blue tones to convey professionalism and trust, distinguishing it from the more vibrant volunteer (blue) and clown (yellow-pink) sections.
+</Warning>

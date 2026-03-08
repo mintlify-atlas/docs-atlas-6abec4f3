@@ -1,0 +1,342 @@
+---
+title: Development Setup
+description: Set up your local development environment for the Siloé Perú website
+---
+
+## Overview
+
+The Siloé Perú website is a single-page HTML application with no build process required. This guide will help you set up a local development environment for making changes and testing modifications.
+
+## Prerequisites
+
+You'll need the following tools installed on your system:
+
+<CardGroup cols={2}>
+  <Card title="Web Browser" icon="browser">
+    Modern browser (Chrome, Firefox, Safari, or Edge)
+  </Card>
+  <Card title="Code Editor" icon="code">
+    VS Code, Sublime Text, or any text editor
+  </Card>
+  <Card title="Local Server (Optional)" icon="server">
+    For testing (Python, Node.js, or VS Code Live Server)
+  </Card>
+  <Card title="Git (Optional)" icon="git">
+    For version control and collaboration
+  </Card>
+</CardGroup>
+
+<Note>
+No Node.js, npm, or build tools are required! This is a vanilla HTML/CSS/JavaScript project.
+</Note>
+
+## File Structure
+
+The project has a simple, straightforward structure:
+
+```
+Web-Siloe/
+├── index.html              # Main HTML file (859 lines)
+├── style.css              # Complete stylesheet (1663 lines)
+├── img voluntario/        # Volunteer section images
+│   ├── fondo.png
+│   ├── img2.png
+│   ├── img entrega de pañales.jpg
+│   ├── img voluntario navidad.jpg
+│   └── ...
+├── img clow/              # Clown section images
+│   ├── 568201215_*.png
+│   ├── 570037802_*.png
+│   └── ...
+└── img logo de mensajeria.png  # WhatsApp button image
+```
+
+## Quick Start
+
+<Steps>
+  <Step title="Download or Clone the Repository">
+    Get the source code to your local machine:
+
+    ```bash
+    git clone https://github.com/darlycv/Web-Siloe.git
+    cd Web-Siloe
+    ```
+
+    Or download the ZIP file from GitHub and extract it.
+  </Step>
+
+  <Step title="Open with a Local Server (Recommended)">
+    For the best experience, use a local development server:
+
+    **Option 1: VS Code Live Server Extension**
+    1. Install the "Live Server" extension in VS Code
+    2. Right-click on `index.html`
+    3. Select "Open with Live Server"
+    4. Your browser will open at `http://localhost:5500`
+
+    **Option 2: Python HTTP Server**
+    ```bash
+    # Python 3
+    python -m http.server 8000
+    
+    # Then visit http://localhost:8000 in your browser
+    ```
+
+    **Option 3: Node.js HTTP Server**
+    ```bash
+    npx http-server -p 8000
+    
+    # Then visit http://localhost:8000 in your browser
+    ```
+  </Step>
+
+  <Step title="Or Open Directly in Browser">
+    You can also open the file directly:
+
+    1. Navigate to the project folder
+    2. Double-click `index.html`
+    3. It will open in your default browser
+
+    <Warning>
+    Some features may not work properly when opened via `file://` protocol. Use a local server for development.
+    </Warning>
+  </Step>
+
+  <Step title="Test Navigation">
+    Click through the four main sections:
+    - ℹ️ Nosotros (About Us)
+    - 👥 Voluntariado Siloé (Volunteers)
+    - 🤡 Clow de Siloé (Hospital Clowns)
+    - 🤝 Nuestros Aliados (Partners)
+  </Step>
+</Steps>
+
+## Recommended Development Tools
+
+### VS Code Extensions
+
+For the best development experience, install these VS Code extensions:
+
+<CardGroup cols={2}>
+  <Card title="Live Server" icon="server">
+    Auto-reload on file changes
+  </Card>
+  <Card title="HTML CSS Support" icon="code">
+    Enhanced HTML/CSS IntelliSense
+  </Card>
+  <Card title="Prettier" icon="wand-magic-sparkles">
+    Code formatting
+  </Card>
+  <Card title="Auto Rename Tag" icon="tags">
+    Automatically rename paired HTML tags
+  </Card>
+</CardGroup>
+
+### Browser Developer Tools
+
+Use your browser's developer tools for debugging:
+
+- **Chrome DevTools**: Press `F12` or `Ctrl+Shift+I` (Windows/Linux) / `Cmd+Option+I` (Mac)
+- **Firefox Developer Tools**: Press `F12`
+- **Safari Web Inspector**: Enable in Preferences → Advanced, then press `Cmd+Option+I`
+
+## Git Workflow
+
+If you're contributing to the project, follow this workflow:
+
+<Steps>
+  <Step title="Fork and Clone">
+    Fork the repository on GitHub, then clone your fork:
+
+    ```bash
+    git clone https://github.com/YOUR_USERNAME/Web-Siloe.git
+    cd Web-Siloe
+    ```
+  </Step>
+
+  <Step title="Create a Feature Branch">
+    Create a new branch for your changes:
+
+    ```bash
+    git checkout -b feature/your-feature-name
+    ```
+  </Step>
+
+  <Step title="Make Your Changes">
+    Edit `index.html`, `style.css`, or add images as needed.
+  </Step>
+
+  <Step title="Test Thoroughly">
+    - Test on multiple browsers
+    - Test on mobile devices or using browser responsive mode
+    - Click through all navigation buttons
+    - Test all flip cards
+    - Test form validation
+  </Step>
+
+  <Step title="Commit and Push">
+    ```bash
+    git add .
+    git commit -m "Add descriptive commit message"
+    git push origin feature/your-feature-name
+    ```
+  </Step>
+
+  <Step title="Create Pull Request">
+    Go to GitHub and create a pull request from your branch.
+  </Step>
+</Steps>
+
+## Testing Checklist
+
+Before submitting changes, verify:
+
+<AccordionGroup>
+  <Accordion title="Navigation System">
+    - ✅ All four navigation buttons work
+    - ✅ Sections show/hide correctly
+    - ✅ Active button styling applies
+    - ✅ Smooth scroll to top works
+  </Accordion>
+
+  <Accordion title="Forms">
+    - ✅ Volunteer form submits correctly
+    - ✅ Clown form submits correctly
+    - ✅ Required field validation works
+    - ✅ Checkbox validation works
+  </Accordion>
+
+  <Accordion title="Interactive Elements">
+    - ✅ Flip cards flip on click
+    - ✅ Only one card flips at a time
+    - ✅ WhatsApp button is visible
+    - ✅ WhatsApp button links correctly
+  </Accordion>
+
+  <Accordion title="Responsive Design">
+    - ✅ Layout works on mobile (< 768px)
+    - ✅ Layout works on tablet (768px - 1024px)
+    - ✅ Layout works on desktop (> 1024px)
+    - ✅ Images scale properly
+    - ✅ Text is readable on all screen sizes
+  </Accordion>
+
+  <Accordion title="Cross-Browser Compatibility">
+    - ✅ Works in Chrome
+    - ✅ Works in Firefox
+    - ✅ Works in Safari
+    - ✅ Works in Edge
+  </Accordion>
+</AccordionGroup>
+
+## Common Development Tasks
+
+### Hot Reloading Setup
+
+With VS Code Live Server:
+
+1. Install the "Live Server" extension
+2. Open `index.html` with Live Server
+3. Any changes to HTML or CSS will automatically reload the page
+4. JavaScript changes may require a manual refresh
+
+### Debugging JavaScript
+
+The website includes console logging for debugging (index.html:727-824):
+
+```javascript
+console.log('✓ Script cargado correctamente');
+console.log('✓ DOM Cargado');
+console.log('✓ Elementos obtenidos:', {
+    btnVoluntarios: !!btnVoluntarios,
+    btnClow: !!btnClow,
+    // ...
+});
+```
+
+Open your browser's Console to see these debug messages.
+
+### CSS Hot Reload
+
+For instant CSS updates without page reload:
+
+1. Open browser DevTools
+2. Make changes in the "Styles" panel
+3. Once satisfied, copy changes to `style.css`
+4. The page will reload with your changes
+
+## Performance Optimization
+
+<Tip>
+For production deployment, consider:
+- Minifying `style.css` using online tools
+- Compressing images with TinyPNG or ImageOptim
+- Enabling gzip compression on your web server
+- Adding cache headers for static assets
+</Tip>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Images not loading">
+    **Problem**: Images appear broken
+    
+    **Solution**: 
+    - Check that image paths are correct (note: folder names have spaces)
+    - Use a local server instead of `file://` protocol
+    - Verify image files exist in the correct directories
+  </Accordion>
+
+  <Accordion title="JavaScript not working">
+    **Problem**: Navigation or flip cards don't work
+    
+    **Solution**:
+    - Check browser Console for errors
+    - Verify script is at the bottom of `index.html` (lines 726-856)
+    - Ensure no syntax errors were introduced
+    - Clear browser cache and reload
+  </Accordion>
+
+  <Accordion title="CSS not applying">
+    **Problem**: Styles don't appear or look wrong
+    
+    **Solution**:
+    - Verify `style.css` is linked correctly (line 13)
+    - Check for CSS syntax errors
+    - Clear browser cache (Ctrl+Shift+R or Cmd+Shift+R)
+    - Verify CSS variables are defined in `:root`
+  </Accordion>
+</AccordionGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Styling Guide"
+    icon="palette"
+    href="/development/styling"
+  >
+    Learn about the CSS architecture and styling system
+  </Card>
+  <Card
+    title="JavaScript Features"
+    icon="js"
+    href="/development/javascript-features"
+  >
+    Understand the JavaScript functionality and event handling
+  </Card>
+  <Card
+    title="Responsive Design"
+    icon="mobile"
+    href="/development/responsive-design"
+  >
+    Explore mobile-first responsive design patterns
+  </Card>
+  <Card
+    title="Color Customization"
+    icon="palette"
+    href="/customization/colors"
+  >
+    Customize the color scheme for your organization
+  </Card>
+</CardGroup>

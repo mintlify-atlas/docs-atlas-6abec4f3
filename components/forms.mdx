@@ -1,0 +1,399 @@
+---
+title: Forms
+description: Documentation for volunteer and clown application forms using FormSubmit.co integration
+---
+
+# Forms
+
+The Siloé Perú website includes two application forms: one for volunteers (Voluntarios) and one for clowns (Clowns). Both forms use [FormSubmit.co](https://formsubmit.co) to send submissions directly to email without backend code.
+
+## Form Types
+
+The website includes two distinct forms:
+
+<Tabs>
+  <Tab title="Volunteer Form">
+    Located in the **Voluntariado** section, this form collects information from potential volunteers who want to support hospitalized children.
+    
+    **Fields:**
+    - Full name (required)
+    - DNI/ID number (required)
+    - Phone number (required)
+    - Motivation textarea (required)
+    - Privacy policy checkbox (required)
+  </Tab>
+  
+  <Tab title="Clown Form">
+    Located in the **Clow** section, this form is for people interested in becoming hospital clowns.
+    
+    **Fields:**
+    - Full name (required)
+    - Email address (required)
+    - Phone number (required)
+    - Motivation textarea (required)
+    - Privacy policy checkbox (required)
+  </Tab>
+</Tabs>
+
+## Volunteer Form Implementation
+
+### HTML Structure
+
+```html index.html
+<section id="formulario-voluntarios" class="form-section">
+    <h2 style="text-align:center;">Formulario de Postulación - Voluntarios</h2>
+    <p style="text-align:center;">Tu seguridad y la de los niños es nuestra prioridad. Por favor, completa tus datos.</p>
+    
+    <form class="volunteer-form" action="https://formsubmit.co/darlycampoverde@gmail.com" method="POST">
+        <div class="form-group">
+            <label for="nombre-voluntario">Nombre Completo *</label>
+            <input type="text" id="nombre-voluntario" name="Nombre Completo" placeholder="Tu nombre completo" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="dni-voluntario">DNI (Identificación) *</label>
+            <input type="text" id="dni-voluntario" name="DNI" placeholder="Tu número de DNI" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="telefono-voluntario">Número de Celular *</label>
+            <input type="tel" id="telefono-voluntario" name="Teléfono" placeholder="Tu teléfono de contacto" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="motivacion-voluntario">¿Por qué te gustaría apoyar? *</label>
+            <textarea id="motivacion-voluntario" name="Motivación" placeholder="¿Por qué te gustaría apoyar en el Hospital del Niño?" rows="5" required></textarea>
+        </div>
+        
+        <div class="form-group checkbox-group">
+            <input type="checkbox" id="aceptacion-voluntario" name="Aceptación" required style="width: auto;">
+            <label for="aceptacion-voluntario" style="width: auto;">Acepto la política de privacidad y el uso de mis datos para la gestión del voluntariado.</label>
+        </div>
+        
+        <button type="submit" class="btn-enviar">ENVIAR MI SOLICITUD</button>
+    </form>
+</section>
+```
+
+## Clown Form Implementation
+
+### HTML Structure
+
+```html index.html
+<section class="form-section clow-form-section">
+    <h2 style="text-align:center;">¡Únete como Clown de Siloé!</h2>
+    <p style="text-align:center; font-weight: 300;">Queremos conocer a nuevos voluntarios que traigan alegría y esperanza a nuestros niños.</p>
+    
+    <form class="clow-form" action="https://formsubmit.co/darlycampoverde@gmail.com" method="POST">
+        <div class="form-group">
+            <label for="nombre-clow">Nombre Completo *</label>
+            <input type="text" id="nombre-clow" name="Nombre Completo" placeholder="Tu nombre" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email-clow">Correo Electrónico *</label>
+            <input type="email" id="email-clow" name="Correo Electrónico" placeholder="tu@email.com" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="telefono-clow">Número de Teléfono *</label>
+            <input type="tel" id="telefono-clow" name="Teléfono" placeholder="+51 9 XXXX XXXX" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="motivacion-clow">¿Por qué quieres ser un Clown de Siloé? *</label>
+            <textarea id="motivacion-clow" name="Motivación" placeholder="Cuéntanos sobre tu experiencia y por qué crees que puedes traer sonrisas..." rows="6" required></textarea>
+        </div>
+        
+        <div class="form-group checkbox-group">
+            <input type="checkbox" id="terminos-clow" name="Aceptación" required style="width: auto;">
+            <label for="terminos-clow" style="width: auto; display: inline;">
+                Acepto la política de privacidad y el uso de mis datos para la gestión del voluntariado de Siloé.
+            </label>
+        </div>
+        
+        <button type="submit" class="btn-enviar btn-clow-submit">¡SÍ, QUIERO SER CLOWN DE SILOÉ!</button>
+    </form>
+</section>
+```
+
+## CSS Styling
+
+### Form Section Container
+
+```css style.css
+.form-section { 
+    padding: 60px 20px; 
+    background: #f4f7f6; 
+}
+
+.form-section h2 {
+    color: var(--azul-siloe);
+}
+
+/* Special background for clown form */
+.clow-form-section {
+    background: linear-gradient(to bottom, #f4f7f6, #fff4e6);
+}
+```
+
+### Form Container
+
+```css style.css
+form { 
+    max-width: 550px; 
+    margin: 0 auto; 
+    background: white; 
+    padding: 40px; 
+    border-radius: 20px; 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); 
+}
+```
+
+### Form Groups
+
+```css style.css
+.form-group {
+    margin-bottom: 28px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--gris-oscuro);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+```
+
+### Input Fields
+
+```css style.css
+input, textarea { 
+    width: 100%; 
+    padding: 15px; 
+    margin: 0;
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--azul-siloe);
+    box-shadow: 0 0 8px rgba(41, 171, 226, 0.2);
+}
+```
+
+### Checkbox Group
+
+```css style.css
+.checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+.checkbox-group input {
+    width: auto;
+    margin-top: 5px;
+}
+
+.checkbox-group label {
+    margin: 0;
+    font-weight: normal;
+    font-size: 0.9rem;
+}
+```
+
+### Submit Buttons
+
+<CodeGroup>
+
+```css Default Button
+.btn-enviar { 
+    background-color: var(--azul-siloe); 
+    color: white; 
+    padding: 15px; 
+    border: none; 
+    width: 100%; 
+    border-radius: 8px; 
+    font-weight: bold; 
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.btn-enviar:hover {
+    background-color: #1e8abc;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(41, 171, 226, 0.3);
+}
+```
+
+```css Clown Button
+.btn-clow-submit {
+    background: linear-gradient(135deg, var(--amarillo-vibrante), var(--rosa-vibrante)) !important;
+    font-size: 1.05rem;
+}
+
+.btn-clow-submit:hover {
+    background: linear-gradient(135deg, #FFC700, #FF5BA0) !important;
+    box-shadow: 0 8px 20px rgba(255, 107, 180, 0.4) !important;
+}
+```
+
+</CodeGroup>
+
+## FormSubmit.co Integration
+
+### How It Works
+
+FormSubmit.co is a free form backend service that sends form submissions to email without requiring server-side code.
+
+<Note>
+The forms use `method="POST"` and `action="https://formsubmit.co/darlycampoverde@gmail.com"` to send submissions directly to the specified email address.
+</Note>
+
+### Key Configuration
+
+```html
+<form action="https://formsubmit.co/YOUR_EMAIL@example.com" method="POST">
+    <!-- Form fields -->
+</form>
+```
+
+**Important attributes:**
+- `action`: FormSubmit endpoint with target email
+- `method`: Must be "POST"
+- `name`: Field names appear as labels in the email
+
+### Field Naming Convention
+
+The `name` attribute determines how fields appear in the email:
+
+```html
+<input type="text" name="Nombre Completo" required>
+<!-- Email will show: "Nombre Completo: [user input]" -->
+
+<input type="email" name="Correo Electrónico" required>
+<!-- Email will show: "Correo Electrónico: [user input]" -->
+```
+
+## Form Validation
+
+### HTML5 Validation
+
+All forms use native HTML5 validation:
+
+<CodeGroup>
+
+```html Required Fields
+<input type="text" name="Nombre Completo" required>
+<!-- Cannot submit if empty -->
+```
+
+```html Email Validation
+<input type="email" name="Correo Electrónico" required>
+<!-- Must be valid email format -->
+```
+
+```html Phone Validation
+<input type="tel" name="Teléfono" required>
+<!-- Phone number input -->
+```
+
+```html Textarea Validation
+<textarea name="Motivación" rows="5" required></textarea>
+<!-- Cannot be empty -->
+```
+
+```html Checkbox Required
+<input type="checkbox" name="Aceptación" required>
+<!-- Must be checked to submit -->
+```
+
+</CodeGroup>
+
+## Responsive Design
+
+```css style.css
+@media (max-width: 768px) {
+    form {
+        padding: 25px;
+    }
+}
+```
+
+## Creating a New Form
+
+To add a new form to the site:
+
+<Steps>
+  <Step title="Create the section">
+    ```html
+    <section class="form-section">
+        <h2 style="text-align:center;">Form Title</h2>
+        <p style="text-align:center;">Form description</p>
+    </section>
+    ```
+  </Step>
+  
+  <Step title="Add the form element">
+    ```html
+    <form action="https://formsubmit.co/YOUR_EMAIL@example.com" method="POST">
+        <!-- Fields will go here -->
+    </form>
+    ```
+  </Step>
+  
+  <Step title="Add form fields">
+    ```html
+    <div class="form-group">
+        <label for="field-id">Field Label *</label>
+        <input type="text" id="field-id" name="Field Name" placeholder="Placeholder text" required>
+    </div>
+    ```
+  </Step>
+  
+  <Step title="Add submit button">
+    ```html
+    <button type="submit" class="btn-enviar">SUBMIT BUTTON TEXT</button>
+    ```
+  </Step>
+</Steps>
+
+## FormSubmit Advanced Features
+
+You can enhance forms with FormSubmit's hidden fields:
+
+```html
+<!-- Custom confirmation page -->
+<input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html">
+
+<!-- Custom subject line -->
+<input type="hidden" name="_subject" value="New volunteer application!">
+
+<!-- Disable CAPTCHA -->
+<input type="hidden" name="_captcha" value="false">
+
+<!-- Email template -->
+<input type="hidden" name="_template" value="table">
+```
+
+<Note>
+FormSubmit requires email verification on first use. The first submission will send a verification email to the specified address.
+</Note>
+
+## Best Practices
+
+1. **Use descriptive name attributes**: They appear as labels in emails
+2. **Add placeholder text**: Helps users understand expected input
+3. **Mark required fields**: Use asterisks (*) in labels and `required` attribute
+4. **Provide clear CTAs**: Use action-oriented button text
+5. **Test thoroughly**: Submit test forms to verify email delivery
+6. **Mobile-friendly**: Ensure forms work well on all screen sizes

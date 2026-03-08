@@ -1,0 +1,434 @@
+---
+title: Hero Sections
+description: Documentation for hero banner components used across different sections of Siloé Perú
+---
+
+# Hero Sections
+
+The Siloé Perú website uses multiple hero sections to create visually striking introductions for each major section. Each hero section has a unique design that reflects the purpose and tone of its content.
+
+## Hero Section Types
+
+The website includes four distinct hero sections:
+
+<CardGroup cols={2}>
+  <Card title="Main Hero" icon="house">
+    The primary landing section with background image, gradient overlay, and navigation buttons
+  </Card>
+  <Card title="Clow Hero" icon="face-smile">
+    Vibrant gradient hero for the Clown section with yellow and pink colors
+  </Card>
+  <Card title="Aliados Hero" icon="handshake">
+    Partnership section hero with gradient background
+  </Card>
+  <Card title="Nosotros Hero" icon="circle-info">
+    About section hero with mission statement styling
+  </Card>
+</CardGroup>
+
+## Main Hero Section
+
+The primary hero section features a background image with gradient overlay and navigation buttons.
+
+### HTML Structure
+
+```html index.html
+<section class="hero" style="background-image: linear-gradient(135deg, rgba(41, 171, 226, 0.75), rgba(255, 107, 180, 0.75)), url('./img voluntario/fondo.png'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <h1>"Estuve enfermo y me visitaste"</h1>
+    <p>— Mt 25:36 —</p>
+    <p>Acompañamos a niños y familias en su proceso de recuperación en el Hospital del Niño y comunidades vulnerables de Perú.</p>
+    <br>
+    <div class="nav-buttons">
+        <button id="btn-nosotros" class="nav-btn nav-btn-active">
+            ℹ️ Nosotros
+        </button>
+        <button id="btn-voluntarios" class="nav-btn">
+            👥 Voluntariado Siloé
+        </button>
+        <button id="btn-clow" class="nav-btn">
+            🤡 Clow de Siloé
+        </button>
+        <button id="btn-aliados" class="nav-btn">
+            🤝 Nuestros Aliados
+        </button>
+    </div>
+</section>
+```
+
+### CSS Styling
+
+```css style.css
+.hero { 
+    background-size: cover; 
+    background-position: center;
+    background-attachment: fixed;
+    height: auto;
+    min-height: 70vh;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    color: white; 
+    text-align: center; 
+    padding: 60px 20px;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(41, 171, 226, 0.3), rgba(255, 107, 180, 0.3));
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero h1 { 
+    font-size: 2.8rem;
+    margin-bottom: 10px; 
+    font-style: italic;
+    position: relative;
+    z-index: 2;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+.hero p { 
+    font-size: 1.1rem;
+    max-width: 700px;
+    position: relative;
+    z-index: 2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+```
+
+<Note>
+The main hero uses `background-attachment: fixed` for a parallax scrolling effect.
+</Note>
+
+## Clow Hero Section
+
+The Clow hero features bright, cheerful colors with a yellow-to-pink gradient.
+
+### HTML Structure
+
+```html index.html
+<section id="clow" class="clow-hero">
+    <h1>🤡 El Clow de Siloé 🤡</h1>
+    <p class="clow-tagline">La Magia de la Risa es Nuestra Medicina</p>
+    
+    <div class="clow-intro">
+        <p>
+            En los pasillos del Hospital del Niño, la risa es medicina. Nuestros clowns hospitalarios 
+            transforman momentos de miedo y dolor en instantes de alegría y esperanza. Con nariz roja, 
+            sonrisa amplia y corazón generoso, traen algo invaluable: la oportunidad de ser niño otra vez.
+        </p>
+        <p>
+            No somos performers que buscan aplausos. Somos acompañantes que entienden que en el rostro 
+            de cada niño hospitalizado hay universos de emociones. Nuestra misión es simple pero profunda: 
+            recordarles que la vida, incluso en los momentos más difíciles, sigue siendo digna de una sonrisa.
+        </p>
+    </div>
+</section>
+```
+
+### CSS Styling
+
+```css style.css
+.clow-hero {
+    background: linear-gradient(135deg, var(--amarillo-vibrante), var(--rosa-vibrante));
+    padding: 60px 20px;
+    text-align: center;
+    color: white;
+}
+
+.clow-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.clow-tagline {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.clow-intro {
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 1rem;
+    line-height: 1.8;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.clow-intro p {
+    margin: 15px 0;
+}
+```
+
+## Aliados Hero Section
+
+The partners/allies hero section uses a gradient background without an image.
+
+### HTML Structure
+
+```html index.html
+<section class="aliados-hero" style="background: linear-gradient(135deg, rgba(41, 171, 226, 0.75), rgba(255, 107, 180, 0.75)); padding: 60px 20px; text-align: center; color: white;">
+    <h1>🤝 Nuestros Aliados</h1>
+    <p>Instituciones comprometidas con transformar vidas a través de la solidaridad y el voluntariado.</p>
+    <p style="font-style: italic; margin-top: 20px;">Juntos, hacemos la diferencia</p>
+</section>
+```
+
+### CSS Styling
+
+```css style.css
+.aliados-hero {
+    background: linear-gradient(135deg, rgba(41, 171, 226, 0.75), rgba(255, 107, 180, 0.75));
+    color: white;
+}
+
+.aliados-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.aliados-hero p {
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+```
+
+## Nosotros Hero Section
+
+The About section hero with mission-focused messaging.
+
+### HTML Structure
+
+```html index.html
+<section class="nosotros-hero" style="background: linear-gradient(135deg, rgba(41, 171, 226, 0.8), rgba(255, 107, 180, 0.8)); padding: 80px 20px; text-align: center; color: white;">
+    <h1 style="font-size: 3.5rem; margin-bottom: 20px; text-shadow: 2px 2px 6px rgba(0,0,0,0.3);">Sobre Siloé</h1>
+    <p style="font-size: 1.3rem; max-width: 700px; margin: 0 auto; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">"Transformamos el dolor en esperanza a través de la solidaridad y el acompañamiento"</p>
+</section>
+```
+
+### CSS Styling
+
+The Nosotros hero uses inline styles but can be extracted to CSS:
+
+```css style.css
+.nosotros-hero {
+    background: linear-gradient(135deg, rgba(41, 171, 226, 0.8), rgba(255, 107, 180, 0.8));
+    padding: 80px 20px;
+    text-align: center;
+    color: white;
+}
+
+.nosotros-hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.nosotros-hero p {
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin: 0 auto;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+```
+
+## CSS Variables Used
+
+All hero sections use consistent color variables:
+
+```css style.css
+:root {
+    --azul-siloe: #29abe2;       /* Blue */
+    --amarillo-vibrante: #FFD700; /* Yellow */
+    --rosa-vibrante: #FF69B4;     /* Pink */
+}
+```
+
+## Responsive Design
+
+<Tabs>
+  <Tab title="Desktop (Default)">
+    ```css
+    .hero h1 { font-size: 2.8rem; }
+    .clow-hero h1 { font-size: 3rem; }
+    .nosotros-hero h1 { font-size: 3.5rem; }
+    .aliados-hero h1 { font-size: 3rem; }
+    ```
+  </Tab>
+  
+  <Tab title="Tablet/Mobile (768px)">
+    ```css
+    @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 1.8rem;
+        }
+        
+        .clow-hero h1 {
+            font-size: 2rem;
+        }
+        
+        .aliados-hero h1 {
+            font-size: 2rem;
+        }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Creating a Custom Hero
+
+<Steps>
+  <Step title="Choose your style">
+    Decide between:
+    - Image + gradient overlay (like main hero)
+    - Gradient only (like clow/aliados/nosotros)
+  </Step>
+  
+  <Step title="Create the HTML structure">
+    <CodeGroup>
+    ```html Image Hero
+    <section class="custom-hero" style="background-image: linear-gradient(135deg, rgba(41, 171, 226, 0.75), rgba(255, 107, 180, 0.75)), url('./img/background.jpg'); background-size: cover; background-position: center;">
+        <h1>Your Title</h1>
+        <p>Your subtitle or description</p>
+    </section>
+    ```
+    
+    ```html Gradient Hero
+    <section class="custom-hero" style="background: linear-gradient(135deg, rgba(41, 171, 226, 0.8), rgba(255, 107, 180, 0.8)); padding: 80px 20px; text-align: center; color: white;">
+        <h1>Your Title</h1>
+        <p>Your subtitle or description</p>
+    </section>
+    ```
+    </CodeGroup>
+  </Step>
+  
+  <Step title="Add CSS styling">
+    ```css
+    .custom-hero {
+        min-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        padding: 60px 20px;
+    }
+    
+    .custom-hero h1 {
+        font-size: 3rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    ```
+  </Step>
+  
+  <Step title="Make it responsive">
+    ```css
+    @media (max-width: 768px) {
+        .custom-hero h1 {
+            font-size: 2rem;
+        }
+    }
+    ```
+  </Step>
+</Steps>
+
+## Customization Options
+
+### Background Gradients
+
+<CodeGroup>
+
+```css Blue to Pink
+background: linear-gradient(135deg, rgba(41, 171, 226, 0.75), rgba(255, 107, 180, 0.75));
+```
+
+```css Yellow to Pink
+background: linear-gradient(135deg, var(--amarillo-vibrante), var(--rosa-vibrante));
+```
+
+```css Custom Colors
+background: linear-gradient(135deg, rgba(red, opacity), rgba(blue, opacity));
+```
+
+</CodeGroup>
+
+### Text Shadows
+
+```css style.css
+/* Subtle shadow */
+text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+
+/* Medium shadow */
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+
+/* Strong shadow */
+text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+```
+
+### Padding Options
+
+```css style.css
+/* Compact hero */
+padding: 40px 20px;
+
+/* Standard hero */
+padding: 60px 20px;
+
+/* Spacious hero */
+padding: 80px 20px;
+```
+
+## Best Practices
+
+1. **Use high-quality images**: For image-based heroes, ensure images are at least 1920px wide
+2. **Maintain contrast**: Ensure text is readable against backgrounds (use text-shadow)
+3. **Consistent gradients**: Use the CSS variables for brand consistency
+4. **Mobile-first**: Test all hero sections on mobile devices
+5. **Accessibility**: Ensure sufficient color contrast (WCAG AA standards)
+6. **Performance**: Optimize background images (compress, use WebP format)
+
+<Note>
+All hero sections use `color: white` for text. If using a light background, adjust text color accordingly.
+</Note>
+
+## Common Patterns
+
+### Hero with Overlay
+
+```html
+<section class="hero" style="background-image: linear-gradient(135deg, rgba(41, 171, 226, 0.75), rgba(255, 107, 180, 0.75)), url('./img/background.jpg');">
+    <!-- Content -->
+</section>
+```
+
+### Hero with ::before Overlay
+
+```css
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(41, 171, 226, 0.3), rgba(255, 107, 180, 0.3));
+    pointer-events: none;
+    z-index: 1;
+}
+```
+
+### Hero with Parallax
+
+```css
+.hero {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+```

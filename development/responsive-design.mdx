@@ -1,0 +1,635 @@
+---
+title: Responsive Design
+description: Learn about the mobile-first responsive design patterns and breakpoints used in the Siloé Perú website
+---
+
+## Overview
+
+The Siloé Perú website is built with a **mobile-first responsive design** approach, ensuring optimal viewing and interaction experience across all devices—from mobile phones to desktop computers.
+
+<Note>
+**Mobile-First** means base styles are written for mobile devices, then enhanced for larger screens using media queries. This approach ensures better performance on mobile devices and progressive enhancement for desktop users.
+</Note>
+
+## Responsive Strategy
+
+The website uses three key responsive techniques:
+
+<CardGroup cols={3}>
+  <Card title="Flexible Grids" icon="grid">
+    CSS Grid with `auto-fit` and `minmax()` for automatic column adjustment
+  </Card>
+  <Card title="Media Queries" icon="mobile">
+    Breakpoints at 768px and 480px for tablet and mobile
+  </Card>
+  <Card title="Flexible Units" icon="ruler">
+    `rem`, `%`, `vh`, and `vw` instead of fixed pixel values
+  </Card>
+</CardGroup>
+
+## Viewport Meta Tag
+
+The responsive design starts with the viewport meta tag (index.html:6):
+
+```html index.html
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+
+This ensures:
+- Page width matches device screen width
+- Initial zoom level is 1:1
+- Users can zoom in/out if needed
+
+## Breakpoints
+
+The website uses two primary breakpoints:
+
+### Desktop (Default)
+
+Base styles assume desktop/tablet landscape (> 768px):
+- Multi-column grids
+- Larger typography
+- Generous spacing
+- Full-width hero sections
+
+### Tablet & Mobile (≤ 768px)
+
+style.css:1620-1663:
+
+```css style.css
+@media (max-width: 768px) {
+    /* Navigation buttons */
+    .nav-buttons {
+        gap: 10px;
+    }
+    
+    .nav-btn {
+        padding: 12px 30px;
+        font-size: 0.9rem;
+    }
+    
+    /* Typography */
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .clow-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    /* Forms */
+    form {
+        padding: 25px;
+    }
+    
+    /* Grids become single column */
+    .frases-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .grid-actividades {
+        grid-template-columns: 1fr;
+    }
+}
+```
+
+### Small Mobile (≤ 480px)
+
+style.css:1598-1613:
+
+```css style.css
+@media (max-width: 480px) {
+    .whatsapp-container {
+        bottom: 20px;
+        right: 20px;
+        gap: 8px;
+    }
+
+    .whatsapp-btn {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .whatsapp-label {
+        font-size: 12px;
+    }
+}
+```
+
+## Flexible Grid Layouts
+
+### Auto-Fit Grid Pattern
+
+The most powerful responsive pattern used throughout the site:
+
+```css style.css
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+```
+
+<Steps>
+  <Step title="repeat(auto-fit, ...)">
+    Creates as many columns as will fit in the available space
+  </Step>
+  
+  <Step title="minmax(280px, 1fr)">
+    Each column is at least 280px wide, but can grow to fill available space
+  </Step>
+  
+  <Step title="Automatic Wrapping">
+    When screen gets narrower, columns automatically wrap to next row
+  </Step>
+</Steps>
+
+### Examples by Section
+
+<Tabs>
+  <Tab title="Gallery Grid">
+    ```css style.css (lines 1356-1362)
+    .galeria-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    ```
+    
+    **Behavior**:
+    - Desktop (1400px): ~4-5 columns
+    - Tablet (768px): 2-3 columns
+    - Mobile (375px): 1 column
+  </Tab>
+  
+  <Tab title="Activities Grid">
+    ```css style.css (lines 238-244)
+    .grid-actividades {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        max-width: 1000px;
+        margin: 40px auto;
+    }
+    ```
+    
+    **Behavior**:
+    - Desktop: 3 columns
+    - Tablet: 2 columns  
+    - Mobile: 1 column
+  </Tab>
+  
+  <Tab title="Values Grid">
+    ```css style.css (lines 1073-1077)
+    .valores-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+    }
+    ```
+    
+    **Behavior**:
+    - Desktop: 3 columns
+    - Tablet: 2 columns
+    - Mobile: 1 column
+  </Tab>
+</Tabs>
+
+## Typography Scaling
+
+### Desktop Typography (Default)
+
+```css
+.hero h1 {
+    font-size: 2.8rem;  /* 44.8px */
+}
+
+.clow-hero h1 {
+    font-size: 3rem;    /* 48px */
+}
+
+h2 {
+    font-size: 2.5rem;  /* 40px */
+}
+```
+
+### Mobile Typography (≤ 768px)
+
+```css
+.hero h1 {
+    font-size: 1.8rem;  /* 28.8px */
+}
+
+.clow-hero h1 {
+    font-size: 2rem;    /* 32px */
+}
+```
+
+<Info>
+Typography scales down ~30-40% on mobile to ensure readability without overwhelming small screens.
+</Info>
+
+## Responsive Images
+
+### Flexible Image Sizing
+
+All images use percentage-based sizing:
+
+```css
+.galeria-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+```
+
+### Background Image Handling
+
+Hero background images adapt to screen size:
+
+```css style.css (lines 127-141)
+.hero {
+    background-size: cover;        /* Image covers entire area */
+    background-position: center;   /* Center the image */
+    background-attachment: fixed;  /* Parallax effect (desktop) */
+    min-height: 70vh;             /* At least 70% of viewport height */
+}
+```
+
+<Tip>
+On mobile browsers, `background-attachment: fixed` often doesn't work due to performance reasons. Consider using `scroll` for mobile:
+
+```css
+@media (max-width: 768px) {
+    .hero {
+        background-attachment: scroll;
+    }
+}
+```
+</Tip>
+
+## Responsive Navigation
+
+### Button Sizing
+
+Navigation buttons scale appropriately:
+
+<Tabs>
+  <Tab title="Desktop">
+    ```css style.css (lines 43-56)
+    .nav-btn {
+        padding: 15px 40px;
+        font-size: 1rem;
+        border-radius: 50px;
+    }
+    ```
+    
+    Large, comfortable click targets
+  </Tab>
+  
+  <Tab title="Mobile (≤ 768px)">
+    ```css style.css (lines 1626-1629)
+    .nav-btn {
+        padding: 12px 30px;
+        font-size: 0.9rem;
+    }
+    ```
+    
+    Slightly smaller to fit on narrow screens
+  </Tab>
+</Tabs>
+
+### Button Layout
+
+Buttons wrap naturally using flexbox:
+
+```css style.css (lines 32-40)
+.nav-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;  /* Allows wrapping on narrow screens */
+    margin-top: 30px;
+}
+```
+
+## Responsive Forms
+
+Forms adapt gracefully across screen sizes:
+
+### Desktop Forms
+
+```css style.css (lines 793-800)
+form {
+    max-width: 550px;
+    margin: 0 auto;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+```
+
+### Mobile Forms (≤ 768px)
+
+```css style.css (lines 1645-1647)
+form {
+    padding: 25px;  /* Reduced padding for smaller screens */
+}
+```
+
+### Form Field Sizing
+
+All form fields are 100% width for easy touch interaction:
+
+```css style.css (lines 361-370)
+input, textarea {
+    width: 100%;
+    padding: 15px;  /* Large tap targets */
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+```
+
+## Touch-Friendly Design
+
+### Minimum Touch Target Size
+
+All interactive elements meet the 44x44px minimum:
+
+```css
+.nav-btn {
+    padding: 15px 40px;  /* Well above 44px height */
+}
+
+.whatsapp-btn {
+    width: 60px;   /* Desktop */
+    height: 60px;
+}
+
+@media (max-width: 480px) {
+    .whatsapp-btn {
+        width: 55px;   /* Still above 44px minimum */
+        height: 55px;
+    }
+}
+```
+
+<Note>
+**Apple & Android Guidelines**: Interactive elements should be at least 44x44 CSS pixels for easy thumb tapping.
+</Note>
+
+### Hover vs Touch States
+
+The design uses hover states that also work on touch:
+
+```css
+.card:hover {
+    transform: translateY(-10px);  /* Also triggered by tap on touch devices */
+    box-shadow: 0 10px 25px rgba(41, 171, 226, 0.2);
+}
+```
+
+## Responsive Spacing
+
+Spacing scales down on smaller screens:
+
+<Tabs>
+  <Tab title="Desktop">
+    ```css
+    section {
+        padding: 80px 20px;
+    }
+    
+    .nosotros-valores {
+        padding: 60px;
+        margin-bottom: 80px;
+    }
+    ```
+  </Tab>
+  
+  <Tab title="Mobile">
+    ```css
+    section {
+        padding: 40px 20px;
+    }
+    
+    .nosotros-valores {
+        padding: 40px 20px;
+        margin-bottom: 50px;
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Large Gallery Items
+
+Special handling for featured gallery items:
+
+```css style.css (lines 1375-1383)
+.galeria-item-grande {
+    grid-column: span 1;  /* Mobile: single column */
+}
+
+@media (min-width: 900px) {
+    .galeria-item-grande {
+        grid-column: span 2;  /* Desktop: spans 2 columns */
+        grid-row: span 2;     /* Desktop: spans 2 rows */
+    }
+}
+```
+
+<Info>
+This creates "hero" gallery items on desktop while maintaining a consistent single-column layout on mobile.
+</Info>
+
+## Testing Responsive Design
+
+### Browser DevTools
+
+<Steps>
+  <Step title="Open DevTools">
+    Press `F12` or `Ctrl+Shift+I` (Windows/Linux) / `Cmd+Option+I` (Mac)
+  </Step>
+  
+  <Step title="Toggle Device Toolbar">
+    Press `Ctrl+Shift+M` (Windows/Linux) / `Cmd+Shift+M` (Mac)
+  </Step>
+  
+  <Step title="Select Device">
+    Choose from presets:
+    - iPhone SE (375px)
+    - iPhone 12 Pro (390px)
+    - iPad (768px)
+    - iPad Pro (1024px)
+    
+    Or enter custom dimensions
+  </Step>
+  
+  <Step title="Test Interactions">
+    - Click navigation buttons
+    - Submit forms
+    - Flip cards
+    - Scroll pages
+  </Step>
+</Steps>
+
+### Common Device Sizes
+
+| Device | Width | Orientation |
+|--------|-------|-------------|
+| iPhone SE | 375px | Portrait |
+| iPhone 12/13 | 390px | Portrait |
+| iPhone 12 Pro Max | 428px | Portrait |
+| iPad | 768px | Portrait |
+| iPad | 1024px | Landscape |
+| Desktop | 1920px | Landscape |
+
+### Real Device Testing
+
+<Warning>
+Always test on real devices! Browser DevTools are helpful but don't perfectly replicate:
+- Touch interactions
+- Scrolling behavior
+- Font rendering
+- Network conditions
+</Warning>
+
+## Performance on Mobile
+
+### Optimized Images
+
+Consider these optimizations for mobile:
+
+```html
+<!-- Use srcset for responsive images -->
+<img 
+    src="image.jpg"
+    srcset="image-400w.jpg 400w,
+            image-800w.jpg 800w,
+            image-1200w.jpg 1200w"
+    sizes="(max-width: 768px) 100vw, 50vw"
+    alt="Description"
+>
+```
+
+### CSS Performance
+
+<CardGroup cols={2}>
+  <Card title="Minimize Reflows" icon="gauge">
+    Avoid animating layout properties (width, height, margin, padding). Prefer transforms.
+  </Card>
+  <Card title="Use will-change" icon="wand-magic">
+    For frequently animated elements:
+    ```css
+    .galeria-flip-card {
+        will-change: transform;
+    }
+    ```
+  </Card>
+  <Card title="Reduce Complexity" icon="layer-group">
+    Simpler layouts paint faster on mobile devices
+  </Card>
+  <Card title="Lazy Load Images" icon="image">
+    Use `loading="lazy"` for below-the-fold images
+  </Card>
+</CardGroup>
+
+## Accessibility Considerations
+
+### Focus States
+
+Ensure keyboard navigation works:
+
+```css
+.nav-btn:focus {
+    outline: 2px solid var(--azul-siloe);
+    outline-offset: 2px;
+}
+```
+
+### Text Contrast
+
+Verify text meets WCAG AA standards (4.5:1 contrast ratio):
+
+```css
+body {
+    color: var(--gris-oscuro);  /* #333 on white = 12.6:1 ✓ */
+}
+```
+
+### Zoom Support
+
+Allow users to zoom:
+
+```html
+<!-- ✓ Good: Allows pinch-zoom -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ✗ Bad: Disables zoom -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+```
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Mobile-First CSS" icon="mobile">
+    Write base styles for mobile, enhance for desktop
+  </Card>
+  <Card title="Touch Targets" icon="hand-pointer">
+    Minimum 44x44px for all interactive elements
+  </Card>
+  <Card title="Flexible Units" icon="ruler">
+    Use rem, %, vh, vw instead of fixed px
+  </Card>
+  <Card title="Test Early" icon="flask">
+    Test on real devices throughout development
+  </Card>
+  <Card title="Performance" icon="gauge-high">
+    Optimize images, minimize CSS, defer JavaScript
+  </Card>
+  <Card title="Progressive Enhancement" icon="layer-group">
+    Ensure core functionality works without JavaScript
+  </Card>
+</CardGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Setup Guide"
+    icon="wrench"
+    href="/development/setup"
+  >
+    Get your development environment ready
+  </Card>
+  <Card
+    title="Styling Guide"
+    icon="palette"
+    href="/development/styling"
+  >
+    Learn the CSS architecture
+  </Card>
+  <Card
+    title="Image Customization"
+    icon="image"
+    href="/customization/images"
+  >
+    Optimize and customize images
+  </Card>
+  <Card
+    title="Form Component"
+    icon="file-lines"
+    href="/components/forms"
+  >
+    Understand form implementation
+  </Card>
+</CardGroup>

@@ -1,0 +1,470 @@
+---
+title: 'Hospital Clown Program'
+description: 'Therapeutic clowning bringing joy and healing to hospitalized children'
+---
+
+## Overview
+
+The Hospital Clown program ("Clow de Siloé") brings therapeutic laughter and emotional support to children at Hospital del Niño through trained clown volunteers who transform hospital environments into spaces of joy and hope.
+
+### Mission Statement
+
+From `index.html:218-233`, the clown program's philosophy:
+
+<Card>
+  "En los pasillos del Hospital del Niño, la risa es medicina. Nuestros clowns hospitalarios transforman momentos de miedo y dolor en instantes de alegría y esperanza. Con nariz roja, sonrisa amplia y corazón generoso, traen algo invaluable: la oportunidad de ser niño otra vez."
+</Card>
+
+## Clown Hero Section
+
+The clown section features a vibrant hero banner with gradient background.
+
+### HTML Structure
+
+From `index.html:218-234`:
+
+```html
+<section id="clow" class="clow-hero">
+    <h1>🤡 El Clow de Siloé 🤡</h1>
+    <p class="clow-tagline">La Magia de la Risa es Nuestra Medicina</p>
+    
+    <div class="clow-intro">
+        <p>
+            En los pasillos del Hospital del Niño, la risa es medicina. Nuestros clowns hospitalarios 
+            transforman momentos de miedo y dolor en instantes de alegría y esperanza. Con nariz roja, 
+            sonrisa amplia y corazón generoso, traen algo invaluable: la oportunidad de ser niño otra vez.
+        </p>
+        <p>
+            No somos performers que buscan aplausos. Somos acompañantes que entienden que en el rostro 
+            de cada niño hospitalizado hay universos de emociones. Nuestra misión es simple pero profunda: 
+            recordarles que la vida, incluso en los momentos más difíciles, sigue siendo digna de una sonrisa.
+        </p>
+    </div>
+</section>
+```
+
+### Clown Hero Styling
+
+The hero section uses a vibrant yellow-to-pink gradient from `style.css:638-668`:
+
+<CodeGroup>
+```css Hero Section (style.css:638-643)
+.clow-hero {
+    background: linear-gradient(135deg, var(--amarillo-vibrante), var(--rosa-vibrante));
+    padding: 60px 20px;
+    text-align: center;
+    color: white;
+}
+```
+
+```css Title Styling (style.css:645-649)
+.clow-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+```
+
+```css Tagline (style.css:651-656)
+.clow-tagline {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+```
+
+```css Introduction Text (style.css:658-668)
+.clow-intro {
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 1rem;
+    line-height: 1.8;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.clow-intro p {
+    margin: 15px 0;
+}
+```
+</CodeGroup>
+
+## Inspirational Quotes Section
+
+The clown section features a grid of inspirational quote cards that animate on hover.
+
+### Quote Cards HTML
+
+From `index.html:236-261`, the quotes section structure:
+
+```html
+<section class="inspiration-section">
+    <h2>Frases que Nos Inspiran</h2>
+    
+    <div class="frases-grid">
+        <!-- Card 1 -->
+        <div class="frase-card">
+            <div class="frase-emoji">😊</div>
+            <p class="frase-text">"La risa es el camino más corto entre dos personas"</p>
+            <p class="frase-author">— Victor Borge</p>
+        </div>
+        
+        <!-- Card 2 -->
+        <div class="frase-card">
+            <div class="frase-emoji">🌟</div>
+            <p class="frase-text">"No cambiamos el diagnóstico, pero sí el pronóstico del día"</p>
+            <p class="frase-author">— Siloé Perú</p>
+        </div>
+        
+        <!-- Card 3 -->
+        <div class="frase-card">
+            <div class="frase-emoji">💖</div>
+            <p class="frase-text">"Ser clown es ser el guardián de la esperanza con una sonrisa"</p>
+            <p class="frase-author">— Siloé Perú</p>
+        </div>
+    </div>
+</section>
+```
+
+### Quote Card Styling
+
+The cards feature hover animations from `style.css:267-323`:
+
+<Tabs>
+  <Tab title="Section Background">
+    ```css style.css:267-270
+    .inspiration-section {
+        background: linear-gradient(135deg, var(--amarillo-vibrante), var(--rosa-vibrante));
+        padding: 60px 20px;
+    }
+    ```
+  </Tab>
+  
+  <Tab title="Grid Layout">
+    ```css style.css:280-287
+    .frases-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    ```
+  </Tab>
+  
+  <Tab title="Card Styling">
+    ```css style.css:290-302
+    .frase-card {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 35px 25px;
+        border-radius: 20px;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .frase-card:hover {
+        transform: translateY(-15px) rotateZ(-1deg);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    }
+    ```
+  </Tab>
+  
+  <Tab title="Typography">
+    ```css style.css:304-323
+    .frase-emoji {
+        font-size: 3rem;
+        margin-bottom: 15px;
+    }
+    
+    .frase-text {
+        font-size: 1.1rem;
+        color: var(--gris-oscuro);
+        font-style: italic;
+        margin: 15px 0;
+        line-height: 1.6;
+        font-weight: 600;
+    }
+    
+    .frase-author {
+        color: var(--rosa-vibrante);
+        font-size: 0.9rem;
+        margin-top: 15px;
+        font-weight: bold;
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Note>
+The hover effect includes both vertical movement (`translateY(-15px)`) and a subtle rotation (`rotateZ(-1deg)`) for a playful, dynamic feel that matches the clown theme.
+</Note>
+
+## Clown Gallery with Flip Cards
+
+The clown program uses the same flip card gallery system as the volunteer program, but with a different color scheme.
+
+### Gallery HTML Example
+
+From `index.html:269-286`, a clown gallery item:
+
+```html
+<div class="galeria-item">
+    <div class="galeria-flip-card">
+        <div class="galeria-flip-front">
+            <img src="./img clow/568201215_18225647026307271_8015100808044120281_n.png" 
+                 alt="Risa que transforma">
+            <div class="galeria-overlay">
+                <p>Risa que Transforma</p>
+            </div>
+        </div>
+        <div class="galeria-flip-back">
+            <div class="galeria-historia">
+                <p class="historia-titulo">😄 Transformación</p>
+                <p class="historia-texto">"Una visita del clown puede cambiar completamente el día de un paciente. Su risa contagia, libera el estrés y abre puertas a la esperanza. En ese instante, el miedo desaparece."</p>
+                <p class="historia-autor">— Clow Siloé</p>
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+### Clown Gallery Styling
+
+The clown gallery uses a warm color scheme from `style.css:1424-1431`:
+
+```css
+/* Variant for clown gallery */
+.galeria-clow {
+    background: linear-gradient(135deg, #fff4e6, #ffe8cc);
+}
+
+.galeria-clow h2 {
+    color: var(--rosa-vibrante);
+}
+```
+
+### Flip Card Mechanics
+
+The flip cards work identically to the volunteer program. See the [Interactive Gallery documentation](/features/interactive-gallery) for full implementation details.
+
+<Steps>
+  <Step title="User clicks card">
+    JavaScript detects click on `.galeria-flip-card`
+  </Step>
+  
+  <Step title="Toggle flipped class">
+    Adds or removes `.flipped` class to trigger CSS transform
+  </Step>
+  
+  <Step title="Card rotates">
+    CSS `transform: rotateY(180deg)` rotates the card
+  </Step>
+  
+  <Step title="Show back content">
+    Back face with story becomes visible due to `backface-visibility: hidden`
+  </Step>
+</Steps>
+
+## Clown Application Form
+
+The clown program has its own application form with fields specific to clown volunteers.
+
+### Form Structure
+
+From `index.html:424-466`, the clown application form:
+
+```html
+<form class="clow-form" action="https://formsubmit.co/darlycampoverde@gmail.com" method="POST">
+    <!-- Full Name -->
+    <div class="form-group">
+        <label for="nombre-clow">Nombre Completo *</label>
+        <input type="text" id="nombre-clow" name="Nombre Completo" 
+               placeholder="Tu nombre" required>
+    </div>
+    
+    <!-- Email -->
+    <div class="form-group">
+        <label for="email-clow">Correo Electrónico *</label>
+        <input type="email" id="email-clow" name="Correo Electrónico" 
+               placeholder="tu@email.com" required>
+    </div>
+    
+    <!-- Phone -->
+    <div class="form-group">
+        <label for="telefono-clow">Número de Teléfono *</label>
+        <input type="tel" id="telefono-clow" name="Teléfono" 
+               placeholder="+51 9 XXXX XXXX" required>
+    </div>
+    
+    <!-- Motivation -->
+    <div class="form-group">
+        <label for="motivacion-clow">¿Por qué quieres ser un Clown de Siloé? *</label>
+        <textarea id="motivacion-clow" name="Motivación" 
+                  placeholder="Cuéntanos sobre tu experiencia y por qué crees que puedes traer sonrisas..." 
+                  rows="6" required></textarea>
+    </div>
+    
+    <!-- Privacy Acceptance -->
+    <div class="form-group checkbox-group">
+        <input type="checkbox" id="terminos-clow" name="Aceptación" 
+               required style="width: auto;">
+        <label for="terminos-clow" style="width: auto; display: inline;">
+            Acepto la política de privacidad y el uso de mis datos para la gestión del voluntariado de Siloé.
+        </label>
+    </div>
+    
+    <!-- Submit Button -->
+    <button type="submit" class="btn-enviar btn-clow-submit">
+        ¡SÍ, QUIERO SER CLOWN DE SILOÉ!
+    </button>
+</form>
+```
+
+### Form Field Comparison
+
+| Field | Volunteer Form | Clown Form | Purpose |
+|-------|----------------|------------|----------|
+| Nombre Completo | ✓ | ✓ | Full name |
+| DNI | ✓ | ✗ | ID number (volunteers only) |
+| Email | ✗ | ✓ | Email (clowns only) |
+| Teléfono | ✓ | ✓ | Phone number |
+| Motivación | ✓ | ✓ | Why they want to join |
+| Aceptación | ✓ | ✓ | Privacy acceptance |
+
+<Note>
+The clown form requests email instead of DNI, as clown volunteers may need different onboarding communication.
+</Note>
+
+### Clown Form Styling
+
+The clown form uses a special gradient submit button from `style.css:418-427`:
+
+<CodeGroup>
+```css Form Background (style.css:430-432)
+.clow-form-section {
+    background: linear-gradient(to bottom, #f4f7f6, #fff4e6);
+}
+```
+
+```css Submit Button (style.css:418-427)
+.btn-clow-submit {
+    background: linear-gradient(135deg, var(--amarillo-vibrante), var(--rosa-vibrante)) !important;
+    font-size: 1.05rem;
+}
+
+.btn-clow-submit:hover {
+    background: linear-gradient(135deg, #FFC700, #FF5BA0) !important;
+    box-shadow: 0 8px 20px rgba(255, 107, 180, 0.4) !important;
+}
+```
+</CodeGroup>
+
+## Color Scheme
+
+The clown program uses vibrant, playful colors:
+
+| Variable | Color | Usage |
+|----------|-------|-------|
+| `--amarillo-vibrante` | `#FFD700` | Yellow accent, gradients |
+| `--rosa-vibrante` | `#FF69B4` | Pink accent, gradients |
+| `--azul-siloe` | `#29abe2` | Secondary blue accent |
+
+### Gradient Examples
+
+<Tabs>
+  <Tab title="Hero Gradient">
+    ```css
+    background: linear-gradient(135deg, var(--amarillo-vibrante), var(--rosa-vibrante));
+    /* Yellow to Pink, 135-degree diagonal */
+    ```
+  </Tab>
+  
+  <Tab title="Gallery Background">
+    ```css
+    background: linear-gradient(135deg, #fff4e6, #ffe8cc);
+    /* Warm cream to light orange */
+    ```
+  </Tab>
+  
+  <Tab title="Form Background">
+    ```css
+    background: linear-gradient(to bottom, #f4f7f6, #fff4e6);
+    /* Light gray to warm cream, top to bottom */
+    ```
+  </Tab>
+</Tabs>
+
+## Therapeutic Clowning Philosophy
+
+The clown program emphasizes three core concepts from the HTML:
+
+<CardGroup cols={3}>
+  <Card title="Connection" icon="heart">
+    "La verdadera magia no está en los trucos, está en la conexión. Cuando un clown mira a los ojos de un niño y sonríe, ocurre la magia."
+  </Card>
+  
+  <Card title="Transformation" icon="sparkles">
+    "No cambiamos el diagnóstico, pero sí el pronóstico del día"
+  </Card>
+  
+  <Card title="Hope" icon="star">
+    "Ser clown es ser el guardián de la esperanza con una sonrisa"
+  </Card>
+</CardGroup>
+
+## Adding New Quote Cards
+
+To add inspirational quotes to the clown section:
+
+<Steps>
+  <Step title="Locate the quotes grid">
+    Find the `.frases-grid` container in `index.html` around line 239.
+  </Step>
+  
+  <Step title="Add new quote card">
+    Copy this structure:
+    ```html
+    <div class="frase-card">
+        <div class="frase-emoji">🎭</div>
+        <p class="frase-text">"Your inspiring quote here"</p>
+        <p class="frase-author">— Author Name</p>
+    </div>
+    ```
+  </Step>
+  
+  <Step title="Choose an emoji">
+    Pick an emoji that represents the quote's theme (joy, hope, love, etc.).
+  </Step>
+  
+  <Step title="Test responsiveness">
+    The grid automatically adjusts to fit new cards. On mobile, cards stack vertically.
+  </Step>
+</Steps>
+
+<Warning>
+Keep quotes concise (under 25 words) to ensure they display well on mobile devices and don't overflow the card height.
+</Warning>
+
+## Responsive Design
+
+The clown section adapts to different screen sizes from `style.css:469-494`:
+
+```css
+@media (max-width: 768px) {
+    .clow-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .frases-grid {
+        grid-template-columns: 1fr;
+    }
+}
+```
+
+<Note>
+On mobile devices:
+- Hero title reduces from 3rem to 2rem
+- Quote cards stack in a single column
+- Gallery items maintain aspect ratio but reduce in size
+</Note>

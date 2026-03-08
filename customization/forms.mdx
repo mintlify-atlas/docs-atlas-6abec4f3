@@ -1,0 +1,587 @@
+---
+title: 'Form Customization'
+description: 'Learn how to customize form fields, validation, and submission endpoints'
+icon: 'envelope'
+---
+
+## Overview
+
+The Siloé Perú website includes two volunteer application forms:
+1. **Volunteer Form** - For general volunteers (`index.html:182-210`)
+2. **Clown Form** - For clown volunteers (`index.html:430-466`)
+
+Both forms use FormSubmit.co for email submission, requiring no backend server.
+
+## Changing the Email Address
+
+<Warning>
+  **Critical:** The current email address `darlycampoverde@gmail.com` receives all form submissions. You MUST change this to your organization's email address.
+</Warning>
+
+### Volunteer Form Email
+
+**Location:** `index.html:182`
+
+<CodeGroup>
+```html Current
+<form class="volunteer-form" action="https://formsubmit.co/darlycampoverde@gmail.com" method="POST">
+```
+
+```html Updated
+<form class="volunteer-form" action="https://formsubmit.co/YOUR_EMAIL@example.com" method="POST">
+```
+</CodeGroup>
+
+### Clown Form Email
+
+**Location:** `index.html:430`
+
+<CodeGroup>
+```html Current
+<form class="clow-form" action="https://formsubmit.co/darlycampoverde@gmail.com" method="POST">
+```
+
+```html Updated
+<form class="clow-form" action="https://formsubmit.co/YOUR_EMAIL@example.com" method="POST">
+```
+</CodeGroup>
+
+<Steps>
+  <Step title="Replace the email address">
+    Change `darlycampoverde@gmail.com` to your organization's email in both forms
+  </Step>
+  
+  <Step title="Confirm the email">
+    On first submission, FormSubmit will send a confirmation email. Click the confirmation link to activate the form
+  </Step>
+  
+  <Step title="Test the form">
+    Submit a test application to ensure emails are being received correctly
+  </Step>
+</Steps>
+
+## Volunteer Form Structure
+
+### Complete Form Fields
+
+**Location:** `index.html:182-210`
+
+The volunteer form includes:
+
+```html
+<form class="volunteer-form" action="https://formsubmit.co/darlycampoverde@gmail.com" method="POST">
+    <!-- Full Name -->
+    <div class="form-group">
+        <label for="nombre-voluntario">Nombre Completo *</label>
+        <input type="text" id="nombre-voluntario" name="Nombre Completo" 
+               placeholder="Tu nombre completo" required>
+    </div>
+    
+    <!-- DNI -->
+    <div class="form-group">
+        <label for="dni-voluntario">DNI (Identificación) *</label>
+        <input type="text" id="dni-voluntario" name="DNI" 
+               placeholder="Tu número de DNI" required>
+    </div>
+    
+    <!-- Phone -->
+    <div class="form-group">
+        <label for="telefono-voluntario">Número de Celular *</label>
+        <input type="tel" id="telefono-voluntario" name="Teléfono" 
+               placeholder="Tu teléfono de contacto" required>
+    </div>
+    
+    <!-- Motivation -->
+    <div class="form-group">
+        <label for="motivacion-voluntario">¿Por qué te gustaría apoyar? *</label>
+        <textarea id="motivacion-voluntario" name="Motivación" 
+                  placeholder="¿Por qué te gustaría apoyar en el Hospital del Niño?" 
+                  rows="5" required></textarea>
+    </div>
+    
+    <!-- Privacy Checkbox -->
+    <div class="form-group checkbox-group">
+        <input type="checkbox" id="aceptacion-voluntario" name="Aceptación" 
+               required style="width: auto;">
+        <label for="aceptacion-voluntario" style="width: auto;">
+            Acepto la política de privacidad y el uso de mis datos para la gestión del voluntariado.
+        </label>
+    </div>
+    
+    <!-- Submit Button -->
+    <button type="submit" class="btn-enviar">ENVIAR MI SOLICITUD</button>
+</form>
+```
+
+## Clown Form Structure
+
+### Complete Form Fields
+
+**Location:** `index.html:430-466`
+
+```html
+<form class="clow-form" action="https://formsubmit.co/darlycampoverde@gmail.com" method="POST">
+    <!-- Full Name -->
+    <div class="form-group">
+        <label for="nombre-clow">Nombre Completo *</label>
+        <input type="text" id="nombre-clow" name="Nombre Completo" 
+               placeholder="Tu nombre" required>
+    </div>
+    
+    <!-- Email -->
+    <div class="form-group">
+        <label for="email-clow">Correo Electrónico *</label>
+        <input type="email" id="email-clow" name="Correo Electrónico" 
+               placeholder="tu@email.com" required>
+    </div>
+    
+    <!-- Phone -->
+    <div class="form-group">
+        <label for="telefono-clow">Número de Teléfono *</label>
+        <input type="tel" id="telefono-clow" name="Teléfono" 
+               placeholder="+51 9 XXXX XXXX" required>
+    </div>
+    
+    <!-- Motivation -->
+    <div class="form-group">
+        <label for="motivacion-clow">¿Por qué quieres ser un Clown de Siloé? *</label>
+        <textarea id="motivacion-clow" name="Motivación" 
+                  placeholder="Cuéntanos sobre tu experiencia y por qué crees que puedes traer sonrisas..." 
+                  rows="6" required></textarea>
+    </div>
+    
+    <!-- Privacy Checkbox -->
+    <div class="form-group checkbox-group">
+        <input type="checkbox" id="terminos-clow" name="Aceptación" 
+               required style="width: auto;">
+        <label for="terminos-clow" style="width: auto; display: inline;">
+            Acepto la política de privacidad y el uso de mis datos para la gestión del voluntariado de Siloé.
+        </label>
+    </div>
+    
+    <!-- Submit Button -->
+    <button type="submit" class="btn-enviar btn-clow-submit">¡SÍ, QUIERO SER CLOWN DE SILOÉ!</button>
+</form>
+```
+
+## Adding New Form Fields
+
+To add a new field to either form:
+
+<Steps>
+  <Step title="Copy an existing form-group">
+    Find a similar field type and copy the entire `<div class="form-group">` block
+  </Step>
+  
+  <Step title="Update the ID and name">
+    Change the `id`, `for`, and `name` attributes to match your new field:
+    ```html
+    <div class="form-group">
+        <label for="edad-voluntario">Edad *</label>
+        <input type="number" id="edad-voluntario" name="Edad" 
+               placeholder="Tu edad" required>
+    </div>
+    ```
+  </Step>
+  
+  <Step title="Insert the field">
+    Paste the new field block where you want it in the form (before the checkbox or submit button)
+  </Step>
+  
+  <Step title="Test the submission">
+    Fill out the form and verify the new field appears in the email you receive
+  </Step>
+</Steps>
+
+<Tip>
+  The `name` attribute determines how the field appears in your email. Use descriptive names like "Edad" or "Ciudad" so you can easily identify the data.
+</Tip>
+
+## Removing Form Fields
+
+To remove a field:
+
+<Steps>
+  <Step title="Locate the form-group">
+    Find the entire `<div class="form-group">` block for the field you want to remove
+  </Step>
+  
+  <Step title="Delete the block">
+    Delete from `<div class="form-group">` to its closing `</div>` tag
+  </Step>
+  
+  <Step title="Test the form">
+    Ensure the form still works and looks correct after removal
+  </Step>
+</Steps>
+
+## Modifying Required/Optional Fields
+
+### Making a Field Optional
+
+Remove the `required` attribute from the input:
+
+<CodeGroup>
+```html Required Field
+<input type="text" id="dni-voluntario" name="DNI" 
+       placeholder="Tu número de DNI" required>
+```
+
+```html Optional Field
+<input type="text" id="dni-voluntario" name="DNI" 
+       placeholder="Tu número de DNI">
+```
+</CodeGroup>
+
+Also update the label to remove the asterisk:
+
+<CodeGroup>
+```html Required Label
+<label for="dni-voluntario">DNI (Identificación) *</label>
+```
+
+```html Optional Label
+<label for="dni-voluntario">DNI (Identificación)</label>
+```
+</CodeGroup>
+
+### Making a Field Required
+
+Add the `required` attribute:
+
+```html
+<input type="email" id="email-voluntario" name="Email" 
+       placeholder="tu@email.com" required>
+```
+
+Add an asterisk to the label:
+
+```html
+<label for="email-voluntario">Correo Electrónico *</label>
+```
+
+## Field Types
+
+### Text Input
+```html
+<input type="text" id="field-id" name="Field Name" placeholder="Placeholder" required>
+```
+
+### Email Input
+```html
+<input type="email" id="field-id" name="Email" placeholder="tu@email.com" required>
+```
+Automatically validates email format.
+
+### Phone Input
+```html
+<input type="tel" id="field-id" name="Teléfono" placeholder="+51 9 XXXX XXXX" required>
+```
+
+### Number Input
+```html
+<input type="number" id="field-id" name="Edad" placeholder="Tu edad" min="18" max="100" required>
+```
+
+### Textarea (Multi-line)
+```html
+<textarea id="field-id" name="Mensaje" placeholder="Tu mensaje" rows="5" required></textarea>
+```
+
+### Checkbox
+```html
+<input type="checkbox" id="field-id" name="Acepto" required>
+```
+
+### Select Dropdown
+```html
+<select id="field-id" name="Disponibilidad" required>
+    <option value="">Selecciona una opción</option>
+    <option value="manana">Mañanas</option>
+    <option value="tarde">Tardes</option>
+    <option value="fin-semana">Fines de semana</option>
+</select>
+```
+
+## Customizing Button Text
+
+### Volunteer Form Button
+
+**Location:** `index.html:208`
+
+```html
+<button type="submit" class="btn-enviar">ENVIAR MI SOLICITUD</button>
+```
+
+Change to:
+```html
+<button type="submit" class="btn-enviar">POSTULAR AHORA</button>
+```
+
+### Clown Form Button
+
+**Location:** `index.html:464`
+
+```html
+<button type="submit" class="btn-enviar btn-clow-submit">¡SÍ, QUIERO SER CLOWN DE SILOÉ!</button>
+```
+
+<Warning>
+  Do NOT remove the `btn-clow-submit` class from the clown form button. This class provides the special gradient styling.
+</Warning>
+
+## Button Styling
+
+Button styles are defined in `style.css`:
+
+### Primary Button Style
+
+**Location:** `style.css:399-416`
+
+```css
+.btn-enviar { 
+    background-color: var(--azul-siloe); 
+    color: white; 
+    padding: 15px; 
+    border: none; 
+    width: 100%; 
+    border-radius: 8px; 
+    font-weight: bold; 
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.btn-enviar:hover {
+    background-color: #1e8abc;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(41, 171, 226, 0.3);
+}
+```
+
+### Clown Button Style
+
+**Location:** `style.css:419-427`
+
+```css
+.btn-clow-submit {
+    background: linear-gradient(135deg, var(--amarillo-vibrante), var(--rosa-vibrante));
+    font-size: 1.05rem;
+}
+
+.btn-clow-submit:hover {
+    background: linear-gradient(135deg, #FFC700, #FF5BA0);
+    box-shadow: 0 8px 20px rgba(255, 107, 180, 0.4);
+}
+```
+
+## Adding reCAPTCHA or Validation
+
+### FormSubmit Built-in Features
+
+FormSubmit.co provides several features you can enable by adding hidden inputs:
+
+#### Disable CAPTCHA
+```html
+<input type="hidden" name="_captcha" value="false">
+```
+
+#### Custom Subject Line
+```html
+<input type="hidden" name="_subject" value="Nueva Solicitud de Voluntario">
+```
+
+#### Redirect After Submission
+```html
+<input type="hidden" name="_next" value="https://yoursite.com/gracias.html">
+```
+
+#### CC Email
+```html
+<input type="hidden" name="_cc" value="another@email.com">
+```
+
+#### Auto-response Email
+```html
+<input type="hidden" name="_autoresponse" value="Gracias por tu interés. Te contactaremos pronto.">
+```
+
+### Example with Features
+
+<CodeGroup>
+```html Basic Form
+<form class="volunteer-form" action="https://formsubmit.co/your@email.com" method="POST">
+    <!-- form fields -->
+</form>
+```
+
+```html Enhanced Form
+<form class="volunteer-form" action="https://formsubmit.co/your@email.com" method="POST">
+    <input type="hidden" name="_subject" value="Nueva Solicitud - Voluntario Siloé">
+    <input type="hidden" name="_captcha" value="true">
+    <input type="hidden" name="_next" value="https://yoursite.com/gracias.html">
+    <input type="hidden" name="_cc" value="coordinator@yourorg.com">
+    
+    <!-- form fields -->
+</form>
+```
+</CodeGroup>
+
+## Changing Success/Confirmation Behavior
+
+### Default Behavior
+
+By default, FormSubmit shows a generic success page after submission.
+
+### Custom Thank You Page
+
+<Steps>
+  <Step title="Create a thank you page">
+    Create a new HTML file (e.g., `gracias.html`) with a thank you message
+  </Step>
+  
+  <Step title="Add redirect to form">
+    Add this hidden input to your form:
+    ```html
+    <input type="hidden" name="_next" value="https://yoursite.com/gracias.html">
+    ```
+  </Step>
+  
+  <Step title="Upload thank you page">
+    Ensure the thank you page is accessible at the URL you specified
+  </Step>
+</Steps>
+
+### Custom Success Message Example
+
+Create `gracias.html`:
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>¡Gracias! - Siloé Perú</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center;">
+    <div>
+        <h1 style="color: var(--azul-siloe); font-size: 3rem;">¡Gracias!</h1>
+        <p style="font-size: 1.2rem; max-width: 600px; margin: 20px auto;">
+            Hemos recibido tu solicitud. Nuestro equipo la revisará y te contactaremos pronto.
+        </p>
+        <a href="index.html" style="display: inline-block; padding: 15px 40px; background: var(--azul-siloe); color: white; text-decoration: none; border-radius: 8px; margin-top: 20px;">
+            Volver al inicio
+        </a>
+    </div>
+</body>
+</html>
+```
+
+## Form Validation
+
+### HTML5 Validation
+
+The forms use built-in HTML5 validation:
+
+- `required` - Field must be filled
+- `type="email"` - Must be valid email format
+- `type="tel"` - Phone number format
+- `minlength="X"` - Minimum character length
+- `maxlength="X"` - Maximum character length
+- `min="X"` and `max="X"` - For number inputs
+
+### Example Custom Validation
+
+```html
+<input type="text" 
+       id="dni-voluntario" 
+       name="DNI" 
+       placeholder="8 dígitos" 
+       required 
+       pattern="[0-9]{8}"
+       title="El DNI debe tener 8 dígitos">
+```
+
+## Form Input Styling
+
+Input styles are defined in `style.css:361-377`:
+
+```css
+input, textarea { 
+    width: 100%; 
+    padding: 15px; 
+    margin: 0;
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--azul-siloe);
+    box-shadow: 0 0 8px rgba(41, 171, 226, 0.2);
+}
+```
+
+## Testing Your Forms
+
+<Steps>
+  <Step title="Test each field">
+    Try submitting with empty required fields to verify validation works
+  </Step>
+  
+  <Step title="Test email format">
+    For email fields, try invalid formats to ensure validation catches errors
+  </Step>
+  
+  <Step title="Submit test data">
+    Fill out completely and submit to verify email delivery
+  </Step>
+  
+  <Step title="Check email formatting">
+    Verify the received email is well-formatted and includes all fields
+  </Step>
+  
+  <Step title="Test on mobile">
+    Ensure forms work correctly on mobile devices
+  </Step>
+</Steps>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Forms not sending emails">
+    - Verify you've confirmed the email address with FormSubmit
+    - Check spam/junk folders
+    - Ensure `method="POST"` is set on the form tag
+    - Verify the action URL is correct: `https://formsubmit.co/your@email.com`
+  </Accordion>
+  
+  <Accordion title="Validation not working">
+    - Ensure `required` attribute is present
+    - Check that input `type` matches the validation needed
+    - Verify there are no JavaScript errors in browser console
+  </Accordion>
+  
+  <Accordion title="Button not clickable">
+    - Check for overlapping elements with browser dev tools
+    - Verify `type="submit"` is set on the button
+    - Ensure no JavaScript is preventing submission
+  </Accordion>
+  
+  <Accordion title="Styling looks broken">
+    - Verify `style.css` is linked in the HTML head
+    - Check that CSS class names match (e.g., `btn-enviar`)
+    - Clear browser cache and reload
+  </Accordion>
+</AccordionGroup>
+
+## Related Documentation
+
+- [Content Customization](/customization/content) - Update form headings and descriptions
+- [Colors Customization](/customization/colors) - Change button colors
+- [Images Customization](/customization/images) - Add visual elements to forms

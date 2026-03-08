@@ -1,0 +1,444 @@
+---
+title: JavaScript Features
+description: Understand the JavaScript functionality powering navigation, flip cards, and interactive elements
+---
+
+## Overview
+
+The Siloé Perú website uses vanilla JavaScript (no frameworks) for all interactive features. The JavaScript code is embedded directly in `index.html` (lines 726-856) and handles:
+
+- Section navigation system
+- 3D flip card interactions
+- Form validation
+- Smooth scrolling
+
+<Note>
+The website uses plain JavaScript (ES5/ES6) with no external dependencies, making it lightweight and easy to understand.
+</Note>
+
+## Code Structure
+
+All JavaScript is wrapped in a DOMContentLoaded event listener to ensure the DOM is fully loaded:
+
+```javascript index.html (lines 730-855)
+document.addEventListener('DOMContentLoaded', function() {
+    // All interactive code here
+});
+```
+
+## Navigation System
+
+### Getting DOM References
+
+The script starts by grabbing references to all navigation buttons and section containers (lines 734-741):
+
+```javascript index.html
+const btnVoluntarios = document.getElementById('btn-voluntarios');
+const btnClow = document.getElementById('btn-clow');
+const btnAliados = document.getElementById('btn-aliados');
+const btnNosotros = document.getElementById('btn-nosotros');
+
+const seccionVoluntariado = document.getElementById('seccion-voluntariado');
+const seccionClow = document.getElementById('seccion-clow');
+const seccionAliados = document.getElementById('seccion-aliados');
+const seccionNosotros = document.getElementById('seccion-nosotros');
+```
+
+### Debug Logging
+
+The code includes helpful console logs for debugging (lines 743-752):
+
+```javascript index.html
+console.log('✓ Elementos obtenidos:', {
+    btnVoluntarios: !!btnVoluntarios,
+    btnClow: !!btnClow,
+    btnAliados: !!btnAliados,
+    btnNosotros: !!btnNosotros,
+    seccionVoluntariado: !!seccionVoluntariado,
+    seccionClow: !!seccionClow,
+    seccionAliados: !!seccionAliados,
+    seccionNosotros: !!seccionNosotros
+});
+```
+
+<Tip>
+Open your browser's Console (F12) to see these debug messages and verify that all elements are found correctly.
+</Tip>
+
+### Section Switching Function
+
+The core navigation logic is in the `mostrarSeccion()` function (lines 755-793):
+
+```javascript index.html
+function mostrarSeccion(nombre) {
+    console.log('Mostrando sección:', nombre);
+    
+    // Ocultar todas las secciones
+    seccionVoluntariado.classList.remove('seccion-activa');
+    seccionVoluntariado.classList.add('seccion-inactiva');
+    seccionClow.classList.remove('seccion-activa');
+    seccionClow.classList.add('seccion-inactiva');
+    seccionAliados.classList.remove('seccion-activa');
+    seccionAliados.classList.add('seccion-inactiva');
+    seccionNosotros.classList.remove('seccion-activa');
+    seccionNosotros.classList.add('seccion-inactiva');
+    
+    // Remover estado activo de todos los botones
+    btnVoluntarios.classList.remove('nav-btn-active');
+    btnClow.classList.remove('nav-btn-active');
+    btnAliados.classList.remove('nav-btn-active');
+    btnNosotros.classList.remove('nav-btn-active');
+    
+    // Mostrar la sección seleccionada
+    if (nombre === 'voluntarios') {
+        seccionVoluntariado.classList.remove('seccion-inactiva');
+        seccionVoluntariado.classList.add('seccion-activa');
+        btnVoluntarios.classList.add('nav-btn-active');
+    } else if (nombre === 'clow') {
+        seccionClow.classList.remove('seccion-inactiva');
+        seccionClow.classList.add('seccion-activa');
+        btnClow.classList.add('nav-btn-active');
+    } else if (nombre === 'aliados') {
+        seccionAliados.classList.remove('seccion-inactiva');
+        seccionAliados.classList.add('seccion-activa');
+        btnAliados.classList.add('nav-btn-active');
+    } else if (nombre === 'nosotros') {
+        seccionNosotros.classList.remove('seccion-inactiva');
+        seccionNosotros.classList.add('seccion-activa');
+        btnNosotros.classList.add('nav-btn-active');
+    }
+    
+    // Scroll suave hacia arriba
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+```
+
+### How It Works
+
+<Steps>
+  <Step title="Hide All Sections">
+    Removes `seccion-activa` and adds `seccion-inactiva` to all section containers
+  </Step>
+  
+  <Step title="Deactivate All Buttons">
+    Removes `nav-btn-active` class from all navigation buttons
+  </Step>
+  
+  <Step title="Show Selected Section">
+    Based on the section name parameter, adds `seccion-activa` to the target section and `nav-btn-active` to its button
+  </Step>
+  
+  <Step title="Scroll to Top">
+    Smoothly scrolls the page to the top using `window.scrollTo({ top: 0, behavior: 'smooth' })`
+  </Step>
+</Steps>
+
+### Event Listeners
+
+Each button has a click event listener (lines 796-823):
+
+```javascript index.html
+if (btnVoluntarios) {
+    btnVoluntarios.addEventListener('click', function(e) {
+        e.preventDefault();
+        mostrarSeccion('voluntarios');
+    });
+}
+
+if (btnClow) {
+    btnClow.addEventListener('click', function(e) {
+        e.preventDefault();
+        mostrarSeccion('clow');
+    });
+}
+
+if (btnAliados) {
+    btnAliados.addEventListener('click', function(e) {
+        e.preventDefault();
+        mostrarSeccion('aliados');
+    });
+}
+
+if (btnNosotros) {
+    btnNosotros.addEventListener('click', function(e) {
+        e.preventDefault();
+        mostrarSeccion('nosotros');
+    });
+}
+```
+
+<Note>
+`e.preventDefault()` prevents the default button behavior. The `if` checks ensure the code doesn't crash if an element is missing.
+</Note>
+
+## Flip Card Interaction
+
+### Selecting All Flip Cards
+
+The script selects all flip cards using `querySelectorAll` (lines 832-833):
+
+```javascript index.html
+const flipCards = document.querySelectorAll('.galeria-flip-card');
+let currentFlipped = null; // Track currently flipped card
+```
+
+### Click Event Handler
+
+Each flip card gets a click listener (lines 836-853):
+
+```javascript index.html
+flipCards.forEach(card => {
+    card.addEventListener('click', function() {
+        // Si hay una tarjeta ya volteada y es diferente a esta
+        if (currentFlipped && currentFlipped !== this) {
+            // Voltear la anterior hacia atrás
+            currentFlipped.classList.remove('flipped');
+        }
+        
+        // Alternar la clase 'flipped' en la tarjeta actual
+        this.classList.toggle('flipped');
+        
+        // Actualizar la referencia a la tarjeta volteada
+        if (this.classList.contains('flipped')) {
+            currentFlipped = this;
+        } else {
+            currentFlipped = null;
+        }
+    });
+});
+```
+
+### How Flip Cards Work
+
+<Steps>
+  <Step title="Check for Previously Flipped Card">
+    If another card is already flipped and it's not the current one, unflip it by removing the `flipped` class
+  </Step>
+  
+  <Step title="Toggle Current Card">
+    Uses `classList.toggle('flipped')` to flip or unflip the clicked card
+  </Step>
+  
+  <Step title="Update State">
+    Updates the `currentFlipped` variable to track which card (if any) is currently flipped
+  </Step>
+</Steps>
+
+<Info>
+This ensures only one card is flipped at a time, creating a clean user experience.
+</Info>
+
+## State Management
+
+The code uses a simple state management pattern:
+
+```javascript
+let currentFlipped = null;  // Tracks which flip card is currently flipped
+```
+
+This variable is:
+- Set to the card element when a card is flipped
+- Set to `null` when the card is unflipped
+- Used to check if another card needs to be unflipped first
+
+## Smooth Scrolling
+
+The navigation system includes smooth scrolling to top:
+
+```javascript
+window.scrollTo({ top: 0, behavior: 'smooth' });
+```
+
+<Tabs>
+  <Tab title="Modern Browsers">
+    ```javascript
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    ```
+    Supported in Chrome, Firefox, Safari (modern), Edge
+  </Tab>
+  
+  <Tab title="Legacy Fallback">
+    ```javascript
+    window.scrollTo(0, 0);
+    ```
+    Instant scroll (no animation) for older browsers
+  </Tab>
+</Tabs>
+
+## Event Delegation Pattern
+
+The code uses direct event listeners on each element rather than event delegation. This is appropriate given:
+
+- Fixed number of navigation buttons (4)
+- Fixed number of sections (4)
+- Flip cards are selected once on page load
+
+<Note>
+For dynamically added content, you would want to use event delegation on a parent element instead.
+</Note>
+
+## Browser Compatibility
+
+The JavaScript uses modern but widely supported features:
+
+| Feature | Browser Support |
+|---------|----------------|
+| `addEventListener` | All modern browsers |
+| `classList.add/remove/toggle` | All modern browsers |
+| `querySelectorAll` | All modern browsers |
+| `forEach` | All modern browsers |
+| Arrow functions | ES6+ (transpile for IE11) |
+| `const`/`let` | ES6+ (transpile for IE11) |
+
+<Warning>
+If you need to support Internet Explorer 11, consider using Babel to transpile the ES6 syntax to ES5.
+</Warning>
+
+## Adding New Interactive Features
+
+### Example: Adding a "Back to Top" Button
+
+<Steps>
+  <Step title="Add HTML Button">
+    ```html
+    <button id="back-to-top" class="back-to-top-btn">↑</button>
+    ```
+  </Step>
+  
+  <Step title="Add CSS Styling">
+    ```css
+    .back-to-top-btn {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        display: none;
+        z-index: 999;
+    }
+    
+    .back-to-top-btn.visible {
+        display: block;
+    }
+    ```
+  </Step>
+  
+  <Step title="Add JavaScript Logic">
+    ```javascript
+    const backToTopBtn = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    });
+    
+    backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    ```
+  </Step>
+</Steps>
+
+## Debugging Tips
+
+### Console Logging
+
+Add strategic console.log statements:
+
+```javascript
+console.log('Button clicked:', buttonName);
+console.log('Current section:', currentSection);
+console.log('Flipped card:', card);
+```
+
+### Browser DevTools
+
+Use browser DevTools to:
+- Set breakpoints in the Sources panel
+- Inspect element references in the Console
+- Monitor event listeners in the Elements panel
+- Watch variable values during execution
+
+### Common Issues
+
+<AccordionGroup>
+  <Accordion title="Elements not found">
+    **Symptom**: `Cannot read property 'addEventListener' of null`
+    
+    **Solution**: 
+    - Check that element IDs match exactly
+    - Verify script runs after DOM is loaded
+    - Check for typos in `getElementById()` calls
+  </Accordion>
+  
+  <Accordion title="Events not firing">
+    **Symptom**: Click does nothing
+    
+    **Solution**:
+    - Check Console for JavaScript errors
+    - Verify event listeners are attached
+    - Make sure element isn't being covered by another element
+    - Check z-index values
+  </Accordion>
+  
+  <Accordion title="Classes not applying">
+    **Symptom**: Visual state doesn't change
+    
+    **Solution**:
+    - Verify CSS classes are defined in style.css
+    - Check class names for typos
+    - Inspect element in DevTools to see which classes are applied
+    - Check for CSS specificity conflicts
+  </Accordion>
+</AccordionGroup>
+
+## Performance Considerations
+
+<CardGroup cols={2}>
+  <Card title="Efficient Selectors" icon="magnifying-glass">
+    Use `getElementById` (fastest) when possible instead of `querySelector`
+  </Card>
+  <Card title="Event Throttling" icon="clock">
+    For scroll events, consider throttling to reduce function calls
+  </Card>
+  <Card title="Minimize Reflows" icon="arrows-rotate">
+    Batch DOM changes together to minimize browser reflows
+  </Card>
+  <Card title="Remove Unused Code" icon="trash">
+    Remove console.log statements in production for slight performance gain
+  </Card>
+</CardGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Responsive Design"
+    icon="mobile"
+    href="/development/responsive-design"
+  >
+    Learn about mobile-first responsive patterns
+  </Card>
+  <Card
+    title="Navigation Component"
+    icon="bars"
+    href="/components/navigation-system"
+  >
+    Deep dive into the navigation system component
+  </Card>
+  <Card
+    title="Flip Cards Component"
+    icon="rotate"
+    href="/components/flip-cards"
+  >
+    Explore the 3D flip card implementation
+  </Card>
+  <Card
+    title="Content Customization"
+    icon="pen"
+    href="/customization/content"
+  >
+    Customize text and messaging
+  </Card>
+</CardGroup>

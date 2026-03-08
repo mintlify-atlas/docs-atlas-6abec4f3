@@ -1,0 +1,335 @@
+---
+title: Navigation System
+description: Learn how to implement and customize the navigation system for section switching in Siloé Perú
+---
+
+# Navigation System
+
+The Siloé Perú website uses a button-based navigation system that controls which content section is visible. The navigation buttons are located in the hero section and control four main sections: Nosotros, Voluntariado, Clow, and Aliados.
+
+## Overview
+
+The navigation system consists of:
+- **Navigation buttons** with active state styling
+- **Section visibility classes** (seccion-activa/seccion-inactiva)
+- **JavaScript event handlers** for button clicks
+- **Smooth scroll** to top when switching sections
+
+## HTML Structure
+
+### Navigation Buttons Container
+
+```html
+<div class="nav-buttons">
+    <button id="btn-nosotros" class="nav-btn nav-btn-active">
+        ℹ️ Nosotros
+    </button>
+    <button id="btn-voluntarios" class="nav-btn">
+        👥 Voluntariado Siloé
+    </button>
+    <button id="btn-clow" class="nav-btn">
+        🤡 Clow de Siloé
+    </button>
+    <button id="btn-aliados" class="nav-btn">
+        🤝 Nuestros Aliados
+    </button>
+</div>
+```
+
+### Section Containers
+
+```html
+<!-- Nosotros section (initially active) -->
+<div id="seccion-nosotros" class="seccion-activa">
+    <!-- Content here -->
+</div>
+
+<!-- Voluntariado section (initially hidden) -->
+<div id="seccion-voluntariado" class="seccion-inactiva">
+    <!-- Content here -->
+</div>
+
+<!-- Clow section (initially hidden) -->
+<div id="seccion-clow" class="seccion-inactiva">
+    <!-- Content here -->
+</div>
+
+<!-- Aliados section (initially hidden) -->
+<div id="seccion-aliados" class="seccion-inactiva">
+    <!-- Content here -->
+</div>
+```
+
+## CSS Styling
+
+### Navigation Button Container
+
+```css style.css
+.nav-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    position: relative;
+    z-index: 2;
+}
+```
+
+### Base Button Styles
+
+```css style.css
+.nav-btn {
+    padding: 15px 40px;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    border: 3px solid transparent;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+}
+```
+
+### Active Button State
+
+```css style.css
+.nav-btn-active {
+    background: linear-gradient(135deg, var(--amarillo-vibrante), var(--rosa-vibrante));
+    color: white;
+    box-shadow: 0 8px 20px rgba(255, 107, 180, 0.4);
+    border-color: white;
+}
+
+.nav-btn-active:hover {
+    box-shadow: 0 12px 30px rgba(255, 107, 180, 0.6);
+    transform: translateY(-5px);
+}
+```
+
+### Section Visibility States
+
+```css style.css
+/* Active section: completely visible */
+#seccion-voluntariado.seccion-activa,
+#seccion-clow.seccion-activa,
+#seccion-aliados.seccion-activa,
+#seccion-nosotros.seccion-activa {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Inactive section: completely hidden */
+#seccion-voluntariado.seccion-inactiva,
+#seccion-clow.seccion-inactiva,
+#seccion-aliados.seccion-inactiva,
+#seccion-nosotros.seccion-inactiva {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+```
+
+## JavaScript Implementation
+
+### Core Navigation Function
+
+The `mostrarSeccion()` function handles section switching:
+
+```javascript index.html
+function mostrarSeccion(nombre) {
+    console.log('Mostrando sección:', nombre);
+    
+    // Hide all sections
+    seccionVoluntariado.classList.remove('seccion-activa');
+    seccionVoluntariado.classList.add('seccion-inactiva');
+    seccionClow.classList.remove('seccion-activa');
+    seccionClow.classList.add('seccion-inactiva');
+    seccionAliados.classList.remove('seccion-activa');
+    seccionAliados.classList.add('seccion-inactiva');
+    seccionNosotros.classList.remove('seccion-activa');
+    seccionNosotros.classList.add('seccion-inactiva');
+    
+    // Remove active state from all buttons
+    btnVoluntarios.classList.remove('nav-btn-active');
+    btnClow.classList.remove('nav-btn-active');
+    btnAliados.classList.remove('nav-btn-active');
+    btnNosotros.classList.remove('nav-btn-active');
+    
+    // Show the selected section
+    if (nombre === 'voluntarios') {
+        seccionVoluntariado.classList.remove('seccion-inactiva');
+        seccionVoluntariado.classList.add('seccion-activa');
+        btnVoluntarios.classList.add('nav-btn-active');
+    } else if (nombre === 'clow') {
+        seccionClow.classList.remove('seccion-inactiva');
+        seccionClow.classList.add('seccion-activa');
+        btnClow.classList.add('nav-btn-active');
+    } else if (nombre === 'aliados') {
+        seccionAliados.classList.remove('seccion-inactiva');
+        seccionAliados.classList.add('seccion-activa');
+        btnAliados.classList.add('nav-btn-active');
+    } else if (nombre === 'nosotros') {
+        seccionNosotros.classList.remove('seccion-inactiva');
+        seccionNosotros.classList.add('seccion-activa');
+        btnNosotros.classList.add('nav-btn-active');
+    }
+    
+    // Smooth scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+```
+
+### Event Listeners
+
+```javascript index.html
+document.addEventListener('DOMContentLoaded', function() {
+    // Get button references
+    const btnVoluntarios = document.getElementById('btn-voluntarios');
+    const btnClow = document.getElementById('btn-clow');
+    const btnAliados = document.getElementById('btn-aliados');
+    const btnNosotros = document.getElementById('btn-nosotros');
+    
+    // Get section references
+    const seccionVoluntariado = document.getElementById('seccion-voluntariado');
+    const seccionClow = document.getElementById('seccion-clow');
+    const seccionAliados = document.getElementById('seccion-aliados');
+    const seccionNosotros = document.getElementById('seccion-nosotros');
+    
+    // Add click events
+    if (btnVoluntarios) {
+        btnVoluntarios.addEventListener('click', function(e) {
+            e.preventDefault();
+            mostrarSeccion('voluntarios');
+        });
+    }
+    
+    if (btnClow) {
+        btnClow.addEventListener('click', function(e) {
+            e.preventDefault();
+            mostrarSeccion('clow');
+        });
+    }
+    
+    if (btnAliados) {
+        btnAliados.addEventListener('click', function(e) {
+            e.preventDefault();
+            mostrarSeccion('aliados');
+        });
+    }
+    
+    if (btnNosotros) {
+        btnNosotros.addEventListener('click', function(e) {
+            e.preventDefault();
+            mostrarSeccion('nosotros');
+        });
+    }
+});
+```
+
+## Responsive Design
+
+The navigation adapts to smaller screens:
+
+```css style.css
+@media (max-width: 768px) {
+    .nav-buttons {
+        gap: 10px;
+    }
+    
+    .nav-btn {
+        padding: 12px 30px;
+        font-size: 0.9rem;
+    }
+}
+```
+
+<Note>
+The navigation buttons use `e.preventDefault()` to prevent default anchor behavior and ensure smooth section transitions.
+</Note>
+
+## Adding a New Section
+
+To add a new navigation section:
+
+<Steps>
+  <Step title="Add the button">
+    Create a new button in the `.nav-buttons` container:
+    ```html
+    <button id="btn-newsection" class="nav-btn">
+        🎉 New Section
+    </button>
+    ```
+  </Step>
+  
+  <Step title="Create the section container">
+    Add a new section container with the inactive state:
+    ```html
+    <div id="seccion-newsection" class="seccion-inactiva">
+        <!-- Your content here -->
+    </div>
+    ```
+  </Step>
+  
+  <Step title="Update CSS">
+    Add the new section to visibility classes:
+    ```css
+    #seccion-newsection.seccion-activa {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    #seccion-newsection.seccion-inactiva {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+    ```
+  </Step>
+  
+  <Step title="Update JavaScript">
+    Add event listener and update `mostrarSeccion()` function:
+    ```javascript
+    const btnNewsection = document.getElementById('btn-newsection');
+    const seccionNewsection = document.getElementById('seccion-newsection');
+    
+    if (btnNewsection) {
+        btnNewsection.addEventListener('click', function(e) {
+            e.preventDefault();
+            mostrarSeccion('newsection');
+        });
+    }
+    
+    // Add to mostrarSeccion function:
+    seccionNewsection.classList.remove('seccion-activa');
+    seccionNewsection.classList.add('seccion-inactiva');
+    btnNewsection.classList.remove('nav-btn-active');
+    
+    // Add new condition:
+    else if (nombre === 'newsection') {
+        seccionNewsection.classList.remove('seccion-inactiva');
+        seccionNewsection.classList.add('seccion-activa');
+        btnNewsection.classList.add('nav-btn-active');
+    }
+    ```
+  </Step>
+</Steps>
+
+## Key Features
+
+- **Single Page Application Feel**: Instant section switching without page reloads
+- **Visual Feedback**: Active button highlighted with gradient and shadow
+- **Smooth Scrolling**: Automatically scrolls to top when switching sections
+- **Accessibility**: Proper button semantics and keyboard navigation
+- **Responsive**: Adapts button size and spacing for mobile devices

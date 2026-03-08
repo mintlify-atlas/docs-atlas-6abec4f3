@@ -1,0 +1,494 @@
+---
+title: CSS Architecture & Styling
+description: Understand the CSS architecture, organization, and styling patterns used in the Siloé Perú website
+---
+
+## Overview
+
+The Siloé Perú website uses a comprehensive CSS architecture built on CSS custom properties (variables), modular styling, and responsive design principles. All styles are contained in a single `style.css` file (1663 lines) for simplicity.
+
+## CSS Variables
+
+The website uses CSS custom properties defined in the `:root` selector for consistent theming (style.css:4-11):
+
+```css style.css
+:root {
+    --azul-siloe: #29abe2;       /* Azul del polo en la imagen */
+    --celeste-claro: #e1f5fe;    /* Celeste claro para tarjetas */
+    --gris-oscuro: #333;         /* Texto principal */
+    --blanco: #ffffff;           /* Fondo principal */
+    --amarillo-vibrante: #FFD700; /* Amarillo - Alegría */
+    --rosa-vibrante: #FF69B4;     /* Rosa - Energía */
+}
+```
+
+### Using CSS Variables
+
+CSS variables are referenced throughout the stylesheet using the `var()` function:
+
+```css
+.hero h1 {
+    color: var(--azul-siloe);
+}
+
+.btn-enviar {
+    background-color: var(--azul-siloe);
+}
+
+.clow-hero {
+    background: linear-gradient(135deg, var(--amarillo-vibrante), var(--rosa-vibrante));
+}
+```
+
+<Tip>
+To change the entire color scheme, simply update the values in `:root`. All components will automatically reflect the new colors.
+</Tip>
+
+## CSS Organization
+
+The stylesheet is organized into logical sections with clear comments:
+
+### 1. Global Styles (lines 16-25)
+
+```css style.css
+body { 
+    font-family: 'Montserrat', sans-serif; 
+    margin: 0; 
+    color: var(--gris-oscuro); 
+    line-height: 1.6; 
+}
+
+h1, h2 { 
+    font-family: 'Playfair Display', serif; 
+}
+```
+
+### 2. Navigation System (lines 32-102)
+
+Styles for the button-based navigation:
+- `.nav-buttons` - Container with flexbox layout
+- `.nav-btn` - Individual button styling
+- `.nav-btn-active` - Active button state
+- `.seccion-activa` / `.seccion-inactiva` - Section visibility
+
+### 3. Hero Sections (lines 127-178)
+
+Multiple hero section variants:
+- `.hero` - Main hero with background image and overlay
+- `.clow-hero` - Colorful gradient hero for clown section
+- `.nosotros-hero` - About us hero
+- `.aliados-hero` - Partners hero
+
+### 4. Component Styles
+
+Individual component sections:
+- Cards and grids (lines 238-260)
+- Forms (lines 329-433)
+- Galleries (lines 1336-1528)
+- Flip cards (lines 1439-1528)
+- Footer (lines 1302-1329)
+
+### 5. Animations (lines 113-122, 1588-1595)
+
+```css style.css
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse-whatsapp {
+    0%, 100% {
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+    }
+    50% {
+        box-shadow: 0 8px 35px rgba(37, 211, 102, 0.5);
+    }
+}
+```
+
+### 6. Responsive Design (lines 1620-1663)
+
+Media queries for mobile and tablet:
+- `@media (max-width: 768px)` - Tablet and mobile
+- `@media (max-width: 480px)` - Small mobile devices
+
+## Grid Layouts
+
+The website extensively uses CSS Grid for responsive layouts:
+
+### Gallery Grid (lines 1356-1362)
+
+```css style.css
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+```
+
+<Note>
+`repeat(auto-fit, minmax(280px, 1fr))` creates a responsive grid that automatically adjusts columns based on available space. Cards will never be smaller than 280px.
+</Note>
+
+### Activities Grid (lines 238-244)
+
+```css style.css
+.grid-actividades {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 40px auto;
+}
+```
+
+### Values Grid (lines 1073-1077)
+
+```css style.css
+.valores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+```
+
+## Gradient Patterns
+
+The website uses consistent gradient patterns for visual cohesion:
+
+### Primary Gradient (Blue to Pink)
+
+```css
+background: linear-gradient(135deg, rgba(41, 171, 226, 0.75), rgba(255, 107, 180, 0.75));
+```
+
+Used in:
+- Hero section overlay
+- Navigation button active state
+- Gallery overlays
+
+### Clown Gradient (Yellow to Pink)
+
+```css
+background: linear-gradient(135deg, var(--amarillo-vibrante), var(--rosa-vibrante));
+```
+
+Used in:
+- Clow hero section
+- Inspiration section
+- Clown submit button
+
+### Subtle Background Gradients
+
+```css
+background: linear-gradient(135deg, #f5f7fa, #fffbf0);
+background: linear-gradient(135deg, #f0e8f8, #e8f4f8);
+```
+
+Used for section backgrounds to add visual interest.
+
+## Typography
+
+### Font Families
+
+The website uses Google Fonts (index.html:10):
+
+```html
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+```
+
+- **Playfair Display**: Serif font for headings (elegant, formal)
+- **Montserrat**: Sans-serif font for body text (modern, readable)
+
+### Font Sizing
+
+```css
+h1 {
+    font-size: 2.8rem;  /* Hero headings */
+}
+
+h2 {
+    font-size: 2.5rem;  /* Section headings */
+}
+
+h3 {
+    font-size: 1.3rem;  /* Card/component headings */
+}
+
+body {
+    font-size: 1rem;    /* Base: 16px */
+    line-height: 1.6;
+}
+```
+
+<Tip>
+Font sizes use `rem` units for accessibility. Users can adjust their browser's base font size and all text will scale proportionally.
+</Tip>
+
+## Shadow System
+
+Consistent shadow patterns create depth:
+
+### Light Shadows (Cards at rest)
+
+```css
+box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+```
+
+### Medium Shadows (Hover states)
+
+```css
+box-shadow: 0 10px 25px rgba(41, 171, 226, 0.2);
+```
+
+### Strong Shadows (Active/elevated states)
+
+```css
+box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+```
+
+## Animation & Transitions
+
+### Hover Transitions
+
+Most interactive elements use smooth transitions:
+
+```css
+.card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(41, 171, 226, 0.2);
+}
+```
+
+### 3D Flip Card Transitions
+
+```css
+.galeria-flip-card {
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.galeria-flip-card.flipped {
+    transform: rotateY(180deg);
+}
+```
+
+<Note>
+The flip card animation uses CSS 3D transforms with `preserve-3d` to create a realistic flip effect. The `backface-visibility: hidden` property ensures the back side isn't visible until flipped.
+</Note>
+
+## Color Usage Patterns
+
+### Section-Specific Colors
+
+<Tabs>
+  <Tab title="Volunteer Section">
+    Primary: `--azul-siloe` (#29abe2)
+    
+    Used for:
+    - Card borders
+    - Headings
+    - Submit buttons
+    - Hover states
+  </Tab>
+  
+  <Tab title="Clown Section">
+    Primary: `--amarillo-vibrante` and `--rosa-vibrante`
+    
+    Used for:
+    - Hero gradient
+    - Quote cards
+    - Submit button
+    - Inspiration section
+  </Tab>
+  
+  <Tab title="About Section">
+    Mixed palette with value badges using gradient circles
+    
+    Used for:
+    - Mission/vision cards
+    - Value number badges
+    - Impact statistics
+  </Tab>
+</Tabs>
+
+## Responsive Breakpoints
+
+The website uses two main breakpoints:
+
+### Tablet & Mobile (768px)
+
+```css
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .nav-btn {
+        padding: 12px 30px;
+        font-size: 0.9rem;
+    }
+    
+    .grid-actividades {
+        grid-template-columns: 1fr;
+    }
+}
+```
+
+### Small Mobile (480px)
+
+```css
+@media (max-width: 480px) {
+    .whatsapp-btn {
+        width: 55px;
+        height: 55px;
+    }
+}
+```
+
+## CSS Naming Conventions
+
+The codebase follows a consistent naming pattern:
+
+### BEM-like Structure
+
+```css
+.galeria-impacto          /* Block */
+.galeria-grid             /* Block__element */
+.galeria-item             /* Block__element */
+.galeria-item-grande      /* Block__element--modifier */
+```
+
+### Component Prefixes
+
+- `.hero-` - Hero section components
+- `.galeria-` - Gallery components
+- `.form-` - Form components
+- `.nosotros-` - About section components
+- `.aliados-` - Partners section components
+- `.clow-` - Clown section components
+
+### State Classes
+
+- `.nav-btn-active` - Active navigation button
+- `.seccion-activa` - Visible section
+- `.seccion-inactiva` - Hidden section
+- `.flipped` - Flipped flip card
+
+## Advanced CSS Techniques
+
+### Backdrop Filters & Overlays
+
+```css
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(41, 171, 226, 0.3), rgba(255, 107, 180, 0.3));
+    pointer-events: none;
+    z-index: 1;
+}
+```
+
+Creates a colored overlay on background images without affecting child elements.
+
+### Flexbox & Grid Centering
+
+```css
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+```
+
+Perfect vertical and horizontal centering for hero content.
+
+### Custom Checkbox Styling
+
+```css
+.checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.checkbox-group input {
+    width: auto;
+    margin-top: 5px;
+}
+```
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Use CSS Variables" icon="palette">
+    Define colors, spacing, and common values as CSS variables for easy maintenance
+  </Card>
+  <Card title="Mobile-First" icon="mobile">
+    Base styles work on mobile, use media queries to enhance for larger screens
+  </Card>
+  <Card title="Semantic Class Names" icon="tag">
+    Use descriptive class names that explain purpose, not appearance
+  </Card>
+  <Card title="Consistent Spacing" icon="ruler">
+    Use a spacing scale (20px, 40px, 60px, 80px) for consistent visual rhythm
+  </Card>
+</CardGroup>
+
+## Performance Tips
+
+<Tip>
+**CSS Optimization**:
+- Group related styles together
+- Avoid overly specific selectors
+- Use shorthand properties where possible
+- Minimize the use of `!important`
+- Consider critical CSS for above-the-fold content
+</Tip>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="JavaScript Features"
+    icon="js"
+    href="/development/javascript-features"
+  >
+    Learn about the JavaScript functionality
+  </Card>
+  <Card
+    title="Responsive Design"
+    icon="mobile"
+    href="/development/responsive-design"
+  >
+    Explore mobile-first responsive patterns
+  </Card>
+  <Card
+    title="Color Customization"
+    icon="palette"
+    href="/customization/colors"
+  >
+    Customize colors for your organization
+  </Card>
+  <Card
+    title="Component Reference"
+    icon="cubes"
+    href="/components/hero-sections"
+  >
+    Browse all reusable components
+  </Card>
+</CardGroup>
