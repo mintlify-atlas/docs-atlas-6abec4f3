@@ -1,0 +1,82 @@
+{
+  "projectType": "frontend",
+  "projectName": "Siloé Perú",
+  "projectDescription": "A volunteer organization website for hospital clowning and support services for children in hospitals and vulnerable communities in Peru",
+  "theme": "almond",
+  "primaryColor": "#29abe2",
+  "lightColor": "#e1f5fe",
+  "darkColor": "#1e8abc",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "getting-started"
+            ]
+          },
+          {
+            "group": "Core Features",
+            "pages": [
+              "features/volunteer-program",
+              "features/hospital-clown",
+              "features/partnerships",
+              "features/interactive-gallery"
+            ]
+          },
+          {
+            "group": "Components",
+            "pages": [
+              "components/navigation-system",
+              "components/forms",
+              "components/flip-cards",
+              "components/hero-sections"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Development",
+        "groups": [
+          {
+            "group": "Guides",
+            "pages": [
+              "development/setup",
+              "development/styling",
+              "development/javascript-features",
+              "development/responsive-design"
+            ]
+          },
+          {
+            "group": "Customization",
+            "pages": [
+              "customization/colors",
+              "customization/content",
+              "customization/forms",
+              "customization/images"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Multi-section single-page navigation system",
+    "Interactive 3D flip card gallery for storytelling",
+    "Volunteer and clown application forms with FormSubmit integration",
+    "Responsive design with mobile-first approach",
+    "WhatsApp floating contact button",
+    "Mission-driven content showcasing social impact"
+  ],
+  "publicApiSurface": [
+    "Navigation system with button-based section switching",
+    "Form submission to darlycampoverde@gmail.com via FormSubmit.co",
+    "3D flip card interaction on click",
+    "Smooth scroll animations",
+    "Social media links (Facebook, Instagram)",
+    "WhatsApp contact integration"
+  ]
+}
